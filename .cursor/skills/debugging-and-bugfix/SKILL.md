@@ -24,7 +24,7 @@ description: Quy trình debug thực dụng cho order-management — reproduce, 
 | Sai trạng thái đơn / tiền | `business-rules` |
 | Cache / refetch | `data-fetching` |
 | Style / component | `ui-design-system` |
-| Chậm UI / re-render / bundle | `react-next-baseline` (rule `rerender-*`, `bundle-*`, …) + `data-fetching` nếu liên quan cache |
+| Chậm UI / re-render / bundle | `react-next-baseline/references/vercel-SKILL-excerpt.md` chọn rule → chỉ `vendor/rules/<rule>.md` tương ứng (không đọc hết `vendor/`) + `data-fetching` nếu liên quan cache |
 
 ## Workflow gói sẵn
 

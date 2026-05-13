@@ -14,7 +14,7 @@ description: Luồng triển khai tính năng mới (thiết kế ngắn → cod
 5. **`ui-design-system`** — khi chạm UI dùng `shared/components/ui`, Tailwind, dark class ở layout.
 6. **`data-fetching`** — React Query hooks trong `features/*/hooks`, API trong `features/*/api`.
 7. **`forms-and-validation`** — RHF + Zod theo pattern repo.
-8. **`react-next-baseline`** — khi chạm performance hoặc boundary Server/Client.
+8. **`react-next-baseline`** — khi chạm performance hoặc boundary Server/Client: `react-next-baseline/references/vercel-SKILL-excerpt.md` → chỉ `vendor/rules/<rule>.md` cần thiết (không đọc hết `vendor/`).
 
 ## Ví dụ prompt
 

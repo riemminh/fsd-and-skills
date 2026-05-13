@@ -10,7 +10,7 @@ description: Mục lục toàn bộ .cursor/skills của order-management — kh
 | Folder | Dùng khi | Ví dụ một dòng trong prompt |
 |--------|----------|-----------------------------|
 | `agent-coding-discipline` | Mọi task cần suy nghĩ / tránh diff lan | “Áp dụng agent-coding-discipline; tiêu chí xong: …” |
-| `react-next-baseline` | React/Next perf, bundle, fetch pattern (Vercel) | “Tham chiếu react-next-baseline cho waterfall/bundle.” |
+| `react-next-baseline` | React/Next perf, bundle, fetch pattern (Vercel) | “react-next-baseline: đọc `references/vercel-SKILL-excerpt.md` rồi chỉ `vendor/rules/<rule>.md` cần thiết — không đọc hết `vendor/`.” |
 | `project-conventions` | Quy ước repo + bản đồ stack/`src/` (xem `references/stack-and-layout.md`) | “Đọc project-conventions + stack-and-layout trước khi thêm route.” |
 | `business-rules` | Đơn, tiền, trạng thái, auth ảnh nghiệp vụ | “business-rules trước khi đổi OrderStatus.” |
 | `ui-design-system` | Tailwind, dark, `shared/components/ui` | “UI theo ui-design-system.” |

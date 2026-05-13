@@ -24,7 +24,7 @@ description: React Query và API client trong order-management — QueryProvider
 
 ## Kết hợp
 
-- `react-next-baseline` — waterfall, parallel fetch, serialize props (khi tối ưu nặng).
+- `react-next-baseline` — waterfall, parallel fetch, serialize props: `react-next-baseline/references/vercel-SKILL-excerpt.md` rồi chỉ `vendor/rules/<rule>.md` liên quan (không đọc hết `vendor/`).
 - `business-rules` — sau mutation phải đúng trạng thái đơn trên server/client.
 - `security-frontend` — token header, không log response nhạy cảm.
 

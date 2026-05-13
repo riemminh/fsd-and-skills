@@ -6,9 +6,9 @@ Toàn bộ skill upstream đã được copy vào:
 
 **`.cursor/skills/react-next-baseline/vendor/`**
 
-Gồm: `SKILL.md`, `README.md`, `metadata.json`, **`AGENTS.md`**, thư mục **`rules/`** (72 file `.md` tại thời điểm tải).
+Gồm: `SKILL.md`, `README.md`, `metadata.json`, **`AGENTS.md`**, thư mục **`rules/`** (các file `.md` từng rule).
 
-Agent **ưu tiên đọc local** từ `vendor/` thay vì mở URL, trừ khi bạn chủ động cập nhật lại từ GitHub.
+**Agent trong repo order-management:** khi làm task perf/React, **không** đọc hàng loạt hay toàn bộ `vendor/`. Luồng chuẩn: [vercel-SKILL-excerpt.md](vercel-SKILL-excerpt.md) → chỉ mở **`vendor/rules/<rule>.md`** cần thiết (1–3 file). `AGENTS.md` / `vendor/SKILL.md` chỉ dùng khi user yêu cầu audit đầy đủ hoặc đối chiếu bản upstream. Ưu tiên đọc local **từng file rule** thay vì mở URL GitHub cho cùng một nội dung.
 
 ## Nguồn gốc (để cập nhật sau này)
 
@@ -30,6 +30,10 @@ rm -rf .upstream-extract .upstream.zip
 ```
 
 **Cách B — CLI:** `npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-react-best-practices` (có thể tạo folder song song; merge tay vào `vendor/` nếu cần).
+
+## Sau khi cập nhật `vendor/`
+
+Đồng bộ lại phần **「Chỉ mục file có trong `vendor/rules/`」** trong [`vercel-SKILL-excerpt.md`](vercel-SKILL-excerpt.md) với danh sách file thực tế trong `vendor/rules/` (tránh agent chọn rule không tồn tại).
 
 ## URL tham chiếu (khi không dùng vendor)
 

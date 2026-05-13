@@ -26,7 +26,7 @@ Chuẩn hóa cách agent sửa bug: **ít đụng file**, **có tiêu chí xong 
 ```text
 Dùng workflow fix-bug-default. Phạm vi: chỉ src/features/orders/components/order-table.tsx và hook liên quan.
 Triệu chứng: sort theo total sai. Reproduce: vào /orders, bấm sort.
-Chỉ đọc thêm `react-next-baseline` nếu có bằng chứng re-render/bundle (rule `rerender-*`, `bundle-*`).
+Chỉ đọc thêm `react-next-baseline` nếu có bằng chứng re-render/bundle: `react-next-baseline/references/vercel-SKILL-excerpt.md` → 1–3 file `react-next-baseline/vendor/rules/<rule>.md` (không mở `vendor/AGENTS.md` hay toàn bộ `vendor/`).
 ```
 
 **Ví dụ 2 — Bug sau khi đổi trạng thái đơn**

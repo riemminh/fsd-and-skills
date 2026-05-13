@@ -8,7 +8,7 @@ description: Luồng triển khai tính năng mới (thiết kế ngắn → cod
 ## Thứ tự skill gợi ý
 
 1. **`agent-coding-discipline`** — làm rõ scope, không mở rộng tính năng không được hỏi.
-2. **`react-project-overview`** — nếu chưa rõ chỗ đặt file (app route vs feature).
+2. **`project-conventions`** — nếu chưa rõ chỗ đặt file (app route vs feature); đọc [stack-and-layout.md](../../project-conventions/references/stack-and-layout.md) cho bản đồ nhanh.
 3. **`business-rules`** — nếu thêm/đổi luồng đơn, quyền, trạng thái.
 4. **`project-conventions`** — import `@/`, barrel `index.ts`, cấu trúc `features/<domain>/`.
 5. **`ui-design-system`** — khi chạm UI dùng `shared/components/ui`, Tailwind, dark class ở layout.

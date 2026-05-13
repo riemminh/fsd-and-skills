@@ -1,17 +1,18 @@
 ---
 name: project-conventions
-description: Quy ước chỉ áp dụng cho repo order-management — alias import, cấu trúc features, ESLint/Prettier, API layer. Dùng khi thêm/sửa file trong src. Kết hợp react-next-baseline cho pattern React/Next chung.
+description: Quy ước và bản đồ repo order-management — stack (Next/React Query), cây thư mục, luồng data, alias import, cấu trúc features, ESLint/Prettier. Dùng khi onboarding, thêm route/feature, hoặc sửa file trong src. Kết hợp react-next-baseline cho pattern React/Next chung.
 ---
 
 # Quy ước dự án (order-management)
 
 ## Nguồn chính thức
 
-- **[docs/ARCHITECTURE.md](../../../docs/ARCHITECTURE.md)** — cấu trúc feature, barrel import, tầng phụ thuộc, naming. Skill này **bám theo** file đó và bổ sung chỗ **lệch thực tế** trong `references/architecture-layers.md`.
+- **[docs/ARCHITECTURE.md](../../../docs/ARCHITECTURE.md)** — cấu trúc feature, barrel import, tầng phụ thuộc, naming; phần Resources có link [Feature-Sliced Design](https://feature-sliced.design/). Skill này **bám theo** file đó và bổ sung chỗ **lệch thực tế** trong `references/architecture-layers.md` (gồm mục so sánh FSD).
 
 ## Khi nào dùng
 
 - Mọi thay đổi dưới `src/`.
+- **Onboarding / lạ codebase** — đọc thêm [stack-and-layout.md](references/stack-and-layout.md) (stack, cây thư mục, luồng request).
 - Khi không chắc **đặt file mới ở đâu** hoặc **import kiểu gì**.
 
 **Không** chứa toàn bộ best practice React — phần đó xem **`react-next-baseline`**.
@@ -24,6 +25,7 @@ description: Quy ước chỉ áp dụng cho repo order-management — alias imp
 
 ## Liên kết
 
+- [stack-and-layout.md](references/stack-and-layout.md) — stack, cây `src/`, luồng data, env (tổng quan nhanh)
 - [architecture-layers.md](references/architecture-layers.md) — `app → features → shared → core → config`, cấm feature import feature
 - [naming-and-imports.md](references/naming-and-imports.md) — alias, barrel, naming file
 - [components-and-hooks.md](references/components-and-hooks.md) — `ui` / `common` / `layout`, hooks shared, auth qua `@/features/auth`
@@ -32,5 +34,5 @@ description: Quy ước chỉ áp dụng cho repo order-management — alias imp
 ## Ví dụ prompt
 
 ```text
-Sửa theo project-conventions; perf thì thêm react-next-baseline. Không đổi cấu trúc features/.
+Sửa theo project-conventions (kèm references/stack-and-layout.md nếu cần bản đồ); perf thì thêm react-next-baseline. Không đổi cấu trúc features/.
 ```

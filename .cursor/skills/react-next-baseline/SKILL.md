@@ -11,22 +11,15 @@ description: Baseline React và Next.js (hiệu năng, bundle, fetch, re-render)
 
 **Ưu tiên khi mâu thuẫn:** `business-rules` và `project-conventions` của team **thắng** nếu khác với tài liệu Vercel.
 
-## Cách đồng bộ nội dung gốc (khuyến nghị)
+## Cách đồng bộ nội dung gốc
 
-Repo upstream: [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills), thư mục skill: `skills/react-best-practices` (trong metadata skill tên là `vercel-react-best-practices`).
+**Đã có bản đầy đủ trong repo:** xem thư mục **`vendor/`** (bản copy từ `vercel-labs/agent-skills` / `skills/react-best-practices`: `AGENTS.md`, `rules/*.md`, `SKILL.md`, …). Chi tiết và lệnh cập nhật lại: [references/upstream-links.md](references/upstream-links.md).
 
-**Cách A — CLI (nếu bạn đã dùng `npx skills add`):**
+**Tuỳ chọn — CLI:** nếu muốn cài song song bằng công cụ:
 
 ```bash
 npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-react-best-practices
 ```
-
-(Skill ID trên CLI có thể map tới gói `react-best-practices`; nếu lệnh báo tên khác, dùng tên skill mà CLI liệt kê.)
-
-**Cách B — Đọc trực tiếp khi cần:**
-
-- SKILL + mục lục rule: [SKILL.md raw](https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/react-best-practices/SKILL.md)
-- Toàn bộ bản mở rộng: [AGENTS.md raw](https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/react-best-practices/AGENTS.md) (file lớn — chỉ đọc khi task perf/review sâu)
 
 ## Khi nào mở skill này
 
@@ -39,8 +32,13 @@ npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-react-
 
 | File | Mục đích |
 |------|-----------|
-| `upstream-links.md` | URL và ghi chú đồng bộ. |
-| `vercel-SKILL-excerpt.md` | Trích phần đầu SKILL upstream (mục lục rule) để tra cứu offline nhẹ. |
+| `upstream-links.md` | Nguồn GitHub + **lệnh cập nhật** thư mục `vendor/`. |
+| `vercel-SKILL-excerpt.md` | Trích mục lục rule (nhẹ); bản đầy đủ nằm trong **`vendor/SKILL.md`** và **`vendor/AGENTS.md`**. |
+
+## Thư mục `vendor/` (bản copy upstream)
+
+- Đọc rule chi tiết: `vendor/rules/<tên-rule>.md`.
+- Mục lục + hướng dẫn gốc Vercel: `vendor/SKILL.md`.
 
 ## Kết hợp
 

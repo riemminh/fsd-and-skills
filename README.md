@@ -194,7 +194,7 @@ src/
 ### 📚 Documentation
 
 - **[STRUCTURE_README.md](./STRUCTURE_README.md)** - Complete architecture overview
-- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Detailed architecture documentation
+- **[ARCHITECTURE.md](./docs/ARCHITECTURE.md)** - Detailed architecture documentation
 - **[MIGRATION_GUIDE.md](./MIGRATION_GUIDE.md)** - Step-by-step migration guide
 - **[PATTERNS.md](./PATTERNS.md)** - Design patterns & best practices
 - **[SUMMARY.md](./SUMMARY.md)** - Quick summary & checklist

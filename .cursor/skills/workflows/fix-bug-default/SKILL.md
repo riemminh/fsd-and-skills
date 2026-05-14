@@ -7,55 +7,111 @@ description: Quy trình sửa bug tối thiểu cho repo order-management. Dùng
 
 ## Mục đích
 
-Chuẩn hóa cách agent sửa bug: **ít đụng file**, **có tiêu chí xong việc**, **ưu tiên đúng nghiệp vụ**, không refactor lan.
+Sửa đúng, sửa nhỏ, không lan: **ít file**, **tiêu chí xong trước khi code**, **ưu tiên đúng nghiệp vụ**, không refactor theo.
 
-## Thứ tự đọc / áp dụng skill (ưu tiên xung đột)
+---
 
-1. **`agent-coding-discipline`** — không đoán mò; diff nhỏ; có bước verify.
-2. **`debugging-and-bugfix`** — reproduce → isolate → fix.
-3. **`business-rules`** — chỉ khi bug liên quan trạng thái đơn, quyền, tính tiền, hủy đơn, lịch sử đơn.
-4. **`project-conventions`** — alias `@/`, cấu trúc feature, ESLint/Prettier của repo.
-5. **`react-next-baseline`** (Vercel) — khi nghi ngờ waterfall fetch, bundle, re-render, Server/Client boundary.
+## Bước 0 — Khai báo trước khi chạm code (bắt buộc)
 
-**Quy tắc xung đột:** đúng nghiệp vụ & an toàn dữ liệu > convention repo > baseline Vercel (baseline không được phá logic đúng của domain).
+Trước khi mở file nào, agent **phải viết ra**:
 
-## Cách dùng trong prompt (ví dụ)
+1. **Giả định** về nguyên nhân (1–2 dòng).
+2. **Tiêu chí xong** — ví dụ: *"sort desc hiển thị đơn mới nhất trên cùng; lặp lại bước reproduce không còn lỗi"*.
+3. **Phạm vi file** sẽ chạm (tên file cụ thể, không "nhiều file có thể").
+4. Nếu có **≥ 2 cách hiểu** yêu cầu → trình bày cả hai, hỏi user, không tự chọn.
 
-**Ví dụ 1 — Bug UI danh sách đơn**
+> Nguồn: `agent-coding-discipline` (Think before coding + Goal-driven).
+
+---
+
+## Bước 1 — Reproduce
+
+- Route cụ thể (`/orders`, `/login`, …), bước bấm, dữ liệu mẫu.
+- Dùng DevTools Network / React Query Devtools / console để confirm triệu chứng trước khi fix.
+
+---
+
+## Bước 2 — Chọn skill bổ sung (chỉ đọc khi đúng điều kiện)
+
+| Điều kiện | Skill cần đọc thêm |
+|-----------|-------------------|
+| Bug liên quan trạng thái đơn, quyền, tính tiền, hủy, timeline | `business-rules` |
+| Import path, chỗ đặt file, barrel, alias `@/` chưa chắc | `project-conventions` |
+| Cache sai, staleTime, double fetch, invalidate sau mutation | `data-fetching` |
+| Bug ở form, Zod schema, message lỗi | `forms-and-validation` |
+| Token, 401, env lộ, `dangerouslySetInnerHTML` | `security-frontend` |
+| Style / component sai | `ui-design-system` |
+| Chậm UI, re-render thừa, bundle phình | `react-next-baseline/references/vercel-SKILL-excerpt.md` → chỉ `vendor/rules/<rule>.md` phù hợp (1–3 file; không mở `AGENTS.md`) |
+
+**Quy tắc ưu tiên khi xung đột:**  
+nghiệp vụ đúng & an toàn dữ liệu > convention repo > baseline Vercel.
+
+---
+
+## Bước 3 — Fix
+
+- Chỉnh **nhỏ nhất** trong file đã khai báo ở Bước 0.
+- Mỗi dòng diff phải **trace** về đúng triệu chứng bug.
+- Không "cải thiện" code lân cận, format, hay comment ngoài phạm vi.
+
+---
+
+## Bước 4 — Verify
+
+- [ ] Lặp lại bước reproduce — bug không còn.
+- [ ] `pnpm lint` và `pnpm type-check` pass (nếu repo có).
+- [ ] Không có file ngoài phạm vi bị thay đổi.
+- [ ] Tiêu chí xong ở Bước 0 đã thỏa.
+
+---
+
+## Stopping rule — khi nào phải hỏi user thay vì đoán
+
+Dừng lại và hỏi khi:
+
+- Không reproduce được bug (cần thêm data mẫu / bước bấm chi tiết hơn).
+- Fix đúng bug nhưng sẽ **phá behavior khác** — cần xác nhận trade-off.
+- Phạm vi "nhỏ nhất" không đủ; cần đụng > 3 file ngoài khai báo ban đầu.
+- Nguyên nhân có ≥ 2 khả năng mà không có bằng chứng phân biệt.
+
+---
+
+## Ví dụ prompt (copy-paste)
+
+**Bug UI — sort sai**
 
 ```text
-Dùng workflow fix-bug-default. Phạm vi: chỉ src/features/orders/components/order-table.tsx và hook liên quan.
-Triệu chứng: sort theo total sai. Reproduce: vào /orders, bấm sort.
-Chỉ đọc thêm `react-next-baseline` nếu có bằng chứng re-render/bundle: `react-next-baseline/references/vercel-SKILL-excerpt.md` → 1–3 file `react-next-baseline/vendor/rules/<rule>.md` (không mở `vendor/AGENTS.md` hay toàn bộ `vendor/`).
+fix-bug-default. Phạm vi: src/features/orders/components/order-table.tsx + hook liên quan.
+Triệu chứng: sort theo total sai (desc hiển thị nhỏ đến lớn).
+Reproduce: /orders → bấm cột "Total" → DESC.
+Tiêu chí xong: bấm DESC → đơn giá cao nhất trên cùng.
+Không đụng file ngoài phạm vi.
 ```
 
-**Ví dụ 2 — Bug sau khi đổi trạng thái đơn**
+**Bug nghiệp vụ — trạng thái đơn sai**
 
 ```text
-fix-bug-default + business-rules. Bug: shipped nhưng timeline vẫn pending.
-Chỉ sửa features/orders và types/order; không đổi auth.
+fix-bug-default + business-rules.
+Bug: đơn ở trạng thái "shipped" nhưng timeline vẫn hiện "pending".
+Phạm vi: features/orders và types/order.
+Không đổi auth hoặc payment.
 ```
 
-**Ví dụ 3 — Lỗi 401 / token**
+**Lỗi 401 / token**
 
 ```text
-fix-bug-default + security-frontend (không log token) + data-fetching nếu cần invalidation query sau login.
+fix-bug-default + security-frontend + data-fetching.
+Bug: logout xong vào lại vẫn không redirect; token cũ còn trong header.
+Tiêu chí: logout → mọi request tiếp theo không có Authorization header.
 ```
 
-## Checklist ngắn cho agent
+---
 
-- [ ] Viết lại **giả định** và **tiêu chí xong** (ví dụ: sort đúng thứ tự desc/asc với cùng bộ dữ liệu).
-- [ ] Reproduce tối thiểu (route, bước bấm).
-- [ ] Fix **trong phạm vi** user cho; không chỉnh file không liên quan.
-- [ ] Chạy `pnpm lint` / test nếu repo có (theo `project-conventions`).
+## Liên kết trong cây skill
 
-## Liên kết skill khác trong cây
-
-| Skill | Khi nào thêm vào cùng workflow này |
-|-------|-----------------------------------|
-| `data-fetching` | Sai dữ liệu do cache, staleTime, invalidation sau mutation. |
-| `forms-and-validation` | Bug ở form tạo/sửa đơn, Zod schema, message lỗi. |
-| `security-frontend` | XSS, token, env lộ, `dangerouslySetInnerHTML`. |
-| `pr-and-code-review` | Khi user yêu cầu review patch trước khi merge. |
-
-Xem thêm: `workflows/feature-shipping` cho luồng tính năng mới.
+| Skill | Vai trò trong flow này |
+|-------|------------------------|
+| `agent-coding-discipline` | Kỷ luật xuyên suốt — Bước 0 lấy từ đây |
+| `debugging-and-bugfix` | Chi tiết luồng reproduce → isolate |
+| `workflows/feature-shipping` | Chuyển sang khi fix xong mà cần thêm tính năng |
+| `pr-and-code-review` | Thêm khi user yêu cầu review patch trước merge |

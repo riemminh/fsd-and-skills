@@ -1,9 +1,35 @@
 ---
 name: feature-shipping
-description: New feature shipping flow (short design → code per conventions → data hooks → test/lint) for order-management. Use when adding screens, API clients, forms, or scoped refactors.
+description: "Feature shipping workflow (order-management). AUTO-PICK when prompt has add/create/new/implement/extend/remove/delete/update/edit/feature/ship/column/button/screen/form OR Vietnamese: thêm, tạo, mới, xóa, cập nhật, chỉnh sửa, bổ sung, thêm cột, triển khai. NOT for bug/fix/regression/wrong/broken/lỗi/sửa lỗi. Scope+Done alone: if Done adds UI/API capability → this skill. Pair: project-conventions."
 ---
 
 # Workflow: Ship a feature
+
+## When to use — keyword routing
+
+**Pick this skill** when the user wants **new or changed product behavior** (UI, API, form, column, permission, refactor with same behavior declared explicitly).
+
+| Signal | Examples (EN) | Examples (VI) |
+|--------|----------------|---------------|
+| Create | `add`, `create`, `new`, `introduce`, `implement` | `thêm`, `tạo`, `mới`, `triển khai` |
+| Change structure | `extend`, `update`, `edit`, `modify`, `change` (behavior/capability) | `cập nhật`, `chỉnh`, `sửa` (component/UI, not “sửa lỗi”) |
+| Remove | `remove`, `delete`, `drop` | `xóa`, `gỡ`, `bỏ` |
+| Ship intent | `feature`, `ship`, `build`, `scaffold` | `tính năng`, `làm feature` |
+| UI/API nouns | `column`, `button`, `page`, `route`, `hook`, `filter`, `dialog` | `cột`, `nút`, `trang`, `filter`, `form` |
+| Done = new capability | `Done: show Items column`, `Done: filter by status` | `Done: hiển thị cột Items` |
+
+**Do not pick this skill** when the user reports **existing behavior is wrong** — use `workflows/fix-bug-default`. Strong **anti-keywords**: `bug`, `fix`, `broken`, `regression`, `wrong`, `not working`, `lỗi`, `sửa lỗi`, `hỏng`, `sai`.
+
+**Disambiguation**
+
+| Phrase | Workflow |
+|--------|----------|
+| `thêm cột Items`, `add filter`, `create login page` | **feature-shipping** |
+| `sort is wrong`, `fix cancel button`, `regression on /orders` | **fix-bug-default** |
+| `refactor` + **behavior unchanged** | **feature-shipping** (surgical; say so in Step 0) |
+| Only `Scope:` + `Done:` | If Done describes **new** UI/API → **feature-shipping**; if **incorrect** current behavior → **fix-bug-default**; else ask |
+
+> Agent: state chosen workflow in Step 0 (e.g. `Workflow: feature-shipping`).
 
 ## Goal
 
@@ -96,6 +122,14 @@ Stop and ask when:
 ---
 
 ## Example prompts (copy-paste)
+
+**Add Items column (table only)**
+
+```text
+feature-shipping. Scope: src/features/orders/components/order-table.tsx only.
+Done: cột "Items" hiển thị order.items.length, căn phải; không sửa order-grid.
+Keywords: thêm cột / add column — not a bugfix.
+```
 
 **Add filter on /orders**
 

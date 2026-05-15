@@ -1,9 +1,35 @@
 ---
 name: fix-bug-default
-description: Minimal bugfix workflow for order-management. Use when the user reports bugs, regressions, or wrong behavior on a page or in the API client. Pair with agent-coding-discipline, debugging-and-bugfix, business-rules (if domain), project-conventions, react-next-baseline as needed.
+description: "Bugfix workflow (order-management). AUTO-PICK when prompt has bug/fix/regression/wrong/broken/incorrect/not working/crash/defect/hotfix/patch (behavior) OR Vietnamese: lỗi, sửa lỗi, hỏng, sai, không hoạt động, regression, sửa bug. NOT for add/create/new/implement/thêm/tạo mới/xóa/bổ sung/cột mới/feature ship. Scope+Done alone is NOT enough. Pair: debugging-and-bugfix, agent-coding-discipline."
 ---
 
 # Workflow: Fix bug (default)
+
+## When to use — keyword routing
+
+**Pick this skill** when the user describes **broken or wrong existing behavior** (something used to work or should match spec but does not).
+
+| Signal | Examples (EN) | Examples (VI) |
+|--------|----------------|---------------|
+| Defect | `bug`, `defect`, `issue` (as in ticket) | `lỗi`, `bug` |
+| Repair behavior | `fix`, `hotfix`, `patch` (fix behavior) | `sửa lỗi`, `sửa bug` |
+| Wrong output | `wrong`, `incorrect`, `unexpected`, `doesn't match` | `sai`, `không đúng`, `không khớp` |
+| Failure | `broken`, `not working`, `fails`, `crash`, `error` (runtime/UI) | `hỏng`, `không hoạt động`, `bị lỗi` |
+| Regression | `regression`, `used to work`, `stopped working` | `regression`, `trước đây đúng giờ sai` |
+| Symptom-led | `Symptom:`, `Reproduce:`, `Expected:` (vs current bug) | `Triệu chứng:`, `Tái hiện:` |
+
+**Do not pick this skill** when the main ask is **new or changed capability** (even in one file) — use `workflows/feature-shipping` instead. Strong **anti-keywords**: `add`, `create`, `new`, `implement`, `extend`, `remove`, `delete`, `feature`, `ship`, `thêm`, `tạo`, `mới`, `xóa`, `bổ sung`, `thêm cột`, `thêm nút`.
+
+**Disambiguation**
+
+| Phrase | Workflow |
+|--------|----------|
+| `sửa lỗi`, `fix bug`, `wrong sort order` | **fix-bug-default** |
+| `sửa` / `edit` + **add column, new field, new button** | **feature-shipping** |
+| Only `Scope:` + `Done:` (no bug/feature verb) | Read [skills-hub](../skills-hub/SKILL.md) → **ask user** or infer from Done (new UI element → feature) |
+| `fix` + **typo / lint / types only** | Neither workflow required; minimal edit |
+
+> Agent: state chosen workflow in Step 0 (e.g. `Workflow: fix-bug-default`).
 
 ## Goal
 

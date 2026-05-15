@@ -50,7 +50,7 @@ Before coding, pick **exactly one** workflow skill. Priority:
 | `react-next-baseline` | React/Next perf, bundle, fetch patterns (Vercel) | “react-next-baseline: read `references/vercel-SKILL-excerpt.md` then only `vendor/rules/<rule>.md` as needed — do not read all of `vendor/`.” |
 | `project-conventions` | Repo conventions + stack/`src/` map (see `references/stack-and-layout.md`) | “Read project-conventions + stack-and-layout before adding a route.” |
 | `business-rules` | Orders, money, status, auth affecting business logic | “business-rules before changing OrderStatus.” |
-| `ui-design-system` | Tailwind, dark mode, `shared/components/ui` | “UI follows ui-design-system.” |
+| `ui-design-system` | Tailwind, `shared/components/ui`; async submit UX detail in `references/async-action-ux.md` | “Read ui-design-system + references/async-action-ux for API-bound buttons.” |
 | `data-fetching` | React Query, axios, `QUERY_KEYS` | “data-fetching: invalidate after cancel.” |
 | `forms-and-validation` | RHF + Zod | “forms-and-validation for create order form.” |
 | `security-frontend` | Token, 401, leaked env | “security-frontend when editing ApiClient.” |

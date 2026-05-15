@@ -38,6 +38,9 @@ export default function CreateOrderPage() {
 
   const methods = useForm<CreateOrderFormData>({
     resolver: zodResolver(CreateOrderSchema),
+    mode: "onSubmit",
+    reValidateMode: "onChange",
+    shouldFocusError: false,
     defaultValues: {
       customerId: "",
       customerName: "",
@@ -65,13 +68,13 @@ export default function CreateOrderPage() {
 
   const handleCustomerSelect = (customer: Customer | null) => {
     if (customer) {
-      setValue("customerId", String(customer.id));
-      setValue("customerName", customer.name);
-      setValue("customerEmail", customer.email);
+      setValue("customerId", String(customer.id), { shouldDirty: true });
+      setValue("customerName", customer.name, { shouldDirty: true });
+      setValue("customerEmail", customer.email, { shouldDirty: true });
     } else {
-      setValue("customerId", "");
-      setValue("customerName", "");
-      setValue("customerEmail", "");
+      setValue("customerId", "", { shouldDirty: true });
+      setValue("customerName", "", { shouldDirty: true });
+      setValue("customerEmail", "", { shouldDirty: true });
     }
   };
 
@@ -123,13 +126,17 @@ export default function CreateOrderPage() {
         </div>
 
         <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
+          <form
+            onSubmit={handleSubmit(onSubmit, () => undefined)}
+            className="space-y-4 sm:space-y-6"
+          >
             {/* Customer Information */}
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg sm:text-xl">Customer Information</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
+                <input type="hidden" value="" {...register("customerId")} />
                 <div className="space-y-2">
                   <Label htmlFor="customerId">Customer *</Label>
                   <CustomerCombobox value={watch("customerId")} onSelect={handleCustomerSelect} />

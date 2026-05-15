@@ -1,5 +1,9 @@
 "use client";
 
+/**
+ * NOTE: Canonical implementation lives in @/features/orders/components/order-items-field.
+ * This copy keeps the corrected RHF + Zod field-array wiring (valueAsNumber, no hidden overrides).
+ */
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -40,9 +44,18 @@ export function OrderItemsField() {
 
   const handleProductSelect = (index: number, product: Product | null) => {
     if (product) {
-      setValue(`items.${index}.productId`, String(product.id));
-      setValue(`items.${index}.productName`, product.name);
-      setValue(`items.${index}.price`, product.price);
+      setValue(`items.${index}.productId`, String(product.id), {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
+      setValue(`items.${index}.productName`, product.name, {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
+      setValue(`items.${index}.price`, product.price, {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
     }
   };
 
@@ -57,7 +70,6 @@ export function OrderItemsField() {
     return items.reduce((sum, item) => sum + item.quantity * item.price, 0);
   };
 
-  // Get already selected product IDs to exclude from other dropdowns
   const selectedProductIds = items?.map((item) => item.productId) || [];
 
   return (
@@ -98,7 +110,6 @@ export function OrderItemsField() {
                   </div>
 
                   <div className="grid gap-4">
-                    {/* Product Selection */}
                     <div className="space-y-2">
                       <Label htmlFor={`items.${index}.productId`}>Product *</Label>
                       <ProductCombobox
@@ -115,7 +126,6 @@ export function OrderItemsField() {
                       )}
                     </div>
 
-                    {/* Quantity and Price */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor={`items.${index}.quantity`}>Quantity *</Label>
@@ -153,7 +163,6 @@ export function OrderItemsField() {
                       </div>
                     </div>
 
-                    {/* Subtotal */}
                     <div className="flex items-center justify-between rounded-md bg-muted p-3">
                       <span className="text-sm font-medium">Subtotal:</span>
                       <span className="text-sm font-semibold">
@@ -168,7 +177,6 @@ export function OrderItemsField() {
         </div>
       )}
 
-      {/* Total Summary */}
       {fields.length > 0 && (
         <Card className="border-primary">
           <CardContent className="pt-6">

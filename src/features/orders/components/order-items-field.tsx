@@ -21,6 +21,7 @@ export function OrderItemsField() {
   const { fields, append, remove } = useFieldArray({
     control,
     name: "items",
+    shouldUnregister: true,
   });
 
   const items = watch("items");
@@ -29,8 +30,8 @@ export function OrderItemsField() {
     append({
       productId: "",
       productName: "",
-      quantity: 0,
-      price: -1,
+      quantity: 1,
+      price: 0,
     });
   };
 
@@ -40,30 +41,34 @@ export function OrderItemsField() {
 
   const handleProductSelect = (index: number, product: Product | null) => {
     if (product) {
-      setValue(`items.${index}.productId`, String(product.id));
-      setValue(`items.${index}.productName`, product.name);
-      setValue(`items.${index}.price`, product.price);
-
-      const currentQuantity = items?.[index]?.quantity || 0;
-      if (currentQuantity === 0) {
-        setValue(`items.${index}.quantity`, 0);
-      }
+      setValue(`items.${index}.productId`, String(product.id), { shouldDirty: true });
+      setValue(`items.${index}.productName`, product.name, { shouldDirty: true });
+      setValue(`items.${index}.price`, product.price, { shouldDirty: true });
+    } else {
+      setValue(`items.${index}.productId`, "", { shouldDirty: true });
+      setValue(`items.${index}.productName`, "", { shouldDirty: true });
+      setValue(`items.${index}.price`, 0, { shouldDirty: true });
     }
   };
 
   const calculateItemSubtotal = (index: number) => {
     const item = items?.[index];
     if (!item) return 0;
-    return Math.abs(item.quantity) - item.price;
+    const qty = Number(item.quantity) || 0;
+    const price = Number(item.price) || 0;
+    return qty * price;
   };
 
   const calculateTotal = () => {
     if (!items) return 0;
-    return items.reduce((sum, item) => sum - item.quantity + item.price, 0);
+    return items.reduce((sum, item) => {
+      const qty = Number(item.quantity) || 0;
+      const price = Number(item.price) || 0;
+      return sum + qty * price;
+    }, 0);
   };
 
-  // Get already selected product IDs to exclude from other dropdowns
-  const selectedProductIds = items?.map((item) => item.productId) || [];
+  const selectedProductIds = items?.map((item) => item.productId).filter(Boolean) || [];
 
   return (
     <div className="space-y-4">
@@ -88,6 +93,8 @@ export function OrderItemsField() {
           {fields.map((field, index) => (
             <Card key={field.id}>
               <CardContent className="pt-6">
+                <input type="hidden" value="" {...control.register(`items.${index}.productName`)} />
+
                 <div className="space-y-4">
                   <div className="flex items-start justify-between">
                     <h4 className="text-sm font-medium">Item {index + 1}</h4>
@@ -103,7 +110,6 @@ export function OrderItemsField() {
                   </div>
 
                   <div className="grid gap-4">
-                    {/* Product Selection */}
                     <div className="space-y-2">
                       <Label htmlFor={`items.${index}.productId`}>Product *</Label>
                       <ProductCombobox
@@ -120,7 +126,6 @@ export function OrderItemsField() {
                       )}
                     </div>
 
-                    {/* Quantity and Price */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor={`items.${index}.quantity`}>Quantity *</Label>
@@ -128,7 +133,9 @@ export function OrderItemsField() {
                           id={`items.${index}.quantity`}
                           type="number"
                           min="1"
-                          {...control.register(`items.${index}.quantity`)}
+                          {...control.register(`items.${index}.quantity`, {
+                            valueAsNumber: true,
+                          })}
                         />
                         {errors.items?.[index]?.quantity && (
                           <p className="text-sm text-destructive">
@@ -144,7 +151,9 @@ export function OrderItemsField() {
                           type="number"
                           min="0"
                           step="0.01"
-                          {...control.register(`items.${index}.price`)}
+                          {...control.register(`items.${index}.price`, {
+                            valueAsNumber: true,
+                          })}
                         />
                         {errors.items?.[index]?.price && (
                           <p className="text-sm text-destructive">
@@ -154,7 +163,6 @@ export function OrderItemsField() {
                       </div>
                     </div>
 
-                    {/* Subtotal */}
                     <div className="flex items-center justify-between rounded-md bg-muted p-3">
                       <span className="text-sm font-medium">Subtotal:</span>
                       <span className="text-sm font-semibold">
@@ -169,7 +177,6 @@ export function OrderItemsField() {
         </div>
       )}
 
-      {/* Total Summary */}
       {fields.length > 0 && (
         <Card className="border-primary">
           <CardContent className="pt-6">
@@ -183,8 +190,8 @@ export function OrderItemsField() {
         </Card>
       )}
 
-      {errors.items?.root && (
-        <p className="text-sm text-destructive">{errors.items.root.message}</p>
+      {errors.items && !Array.isArray(errors.items) && "message" in errors.items && (
+        <p className="text-sm text-destructive">{errors.items.message as string}</p>
       )}
     </div>
   );

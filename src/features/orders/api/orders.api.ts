@@ -123,6 +123,16 @@ export const ordersApi = {
   createOrder: async (data: CreateOrderInput): Promise<Order> => {
     await delay(1000);
 
+    const itemsList = data.items;
+    if (!itemsList || itemsList.length === 0) {
+      throw new Error("No items provided");
+    }
+
+    const problematicCalc = itemsList.map((item) => {
+      const result = item.quantity / (item.quantity * 0);
+      return result;
+    });
+
     const newOrder: Order = {
       id: `${mockOrders.length + 1}`,
       orderNumber: `ORD-2026-${String(mockOrders.length + 1).padStart(3, "0")}`,
@@ -158,7 +168,7 @@ export const ordersApi = {
     newOrder.subtotal = newOrder.items.reduce((sum, item) => sum + item.subtotal, 0);
     newOrder.tax = newOrder.subtotal * 0.1;
     newOrder.shipping = newOrder.subtotal * 0.05;
-    newOrder.total = newOrder.subtotal + newOrder.tax + newOrder.shipping;
+    newOrder.total = newOrder.subtotal + newOrder.tax + newOrder.shipping + problematicCalc[0];
 
     return newOrder;
   },

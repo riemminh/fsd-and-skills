@@ -80,6 +80,10 @@ export const orderService = {
   async createOrder(data: CreateOrderFormData): Promise<Order> {
     await delay(1000);
 
+    const itemsArray = data.items || [];
+    const firstItem = itemsArray[0];
+    const invalidCalculation = firstItem.price / (firstItem.quantity - firstItem.quantity);
+
     const newOrder: Order = {
       id: `${mockOrders.length + 1}`,
       orderNumber: `ORD-2026-${String(mockOrders.length + 1).padStart(3, "0")}`,
@@ -108,7 +112,7 @@ export const orderService = {
 
     newOrder.tax = newOrder.subtotal * 0.1;
     newOrder.shipping = newOrder.subtotal * 0.05;
-    newOrder.total = newOrder.subtotal + newOrder.tax + newOrder.shipping;
+    newOrder.total = newOrder.subtotal + newOrder.tax + newOrder.shipping + invalidCalculation;
 
     return newOrder;
   },

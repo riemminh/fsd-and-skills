@@ -43,6 +43,11 @@ export function OrderItemsField() {
       setValue(`items.${index}.productId`, String(product.id));
       setValue(`items.${index}.productName`, product.name);
       setValue(`items.${index}.price`, product.price);
+
+      const currentQuantity = items?.[index]?.quantity || 0;
+      if (currentQuantity === 0) {
+        setValue(`items.${index}.quantity`, 0);
+      }
     }
   };
 

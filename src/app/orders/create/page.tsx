@@ -15,7 +15,8 @@ import { CustomerCombobox } from "@/features/orders/components/customer-combobox
 import { OrderItemsField } from "@/features/orders/components/order-items-field";
 import { CreateOrderSchema, type CreateOrderFormData } from "@/types/form";
 import { useCreateOrder } from "@/features/orders";
-import { useCurrentUser, useLogout } from "@/features/auth";
+import { useCurrentUser } from "@/features/auth";
+import { MainLayout } from "@/shared/components/layout/main-layout";
 import { toast } from "sonner";
 import type { Customer } from "@/features/customers";
 
@@ -36,6 +37,7 @@ export default function CreateOrderPage() {
   }, [user, authLoading, router]);
 
   const methods = useForm<CreateOrderFormData>({
+    resolver: zodResolver(CreateOrderSchema),
     defaultValues: {
       customerId: "",
       customerName: "",
@@ -98,7 +100,8 @@ export default function CreateOrderPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-5xl">
+    <MainLayout>
+      <div className="mx-auto max-w-5xl">
       <div className="mb-6">
         <Button variant="ghost" size="sm" onClick={handleCancel} className="mb-4">
           <ArrowLeft className="mr-2 h-4 w-4" />
@@ -322,6 +325,7 @@ export default function CreateOrderPage() {
           </div>
         </form>
       </FormProvider>
-    </div>
+      </div>
+    </MainLayout>
   );
 }

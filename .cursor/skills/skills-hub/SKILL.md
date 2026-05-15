@@ -19,8 +19,8 @@ description: Index of all order-management `.cursor/skills` — when to use each
 | `security-frontend` | Token, 401, leaked env | “security-frontend when editing ApiClient.” |
 | `debugging-and-bugfix` | Bug workflow | “debugging-and-bugfix + reproduce on /orders.” |
 | `pr-and-code-review` | PR review | “pr-and-code-review for current diff.” |
-| `workflows/fix-bug-default` | Bugfix bundle | “Run workflow fix-bug-default.” |
-| `workflows/feature-shipping` | New feature bundle | “Run workflow feature-shipping.” |
+| `workflows/fix-bug-default` | Bugfix bundle | “Run fix-bug-default. Verify: one type-check + one lint after all edits.” |
+| `workflows/feature-shipping` | New feature bundle | “Run feature-shipping. Verify: one type-check + one lint after all edits.” |
 
 ## Priority when skills conflict
 
@@ -41,7 +41,7 @@ description: Index of all order-management `.cursor/skills` — when to use each
 `workflows/fix-bug-default` + scope `order-table.tsx` + `project-conventions` + (if slow / re-renders) `react-next-baseline`.
 
 **Add API filter + cache**  
-`workflows/feature-shipping` + `data-fetching` + `project-conventions` (add `references/stack-and-layout.md` if you need the map).
+`workflows/feature-shipping` + `data-fetching` + `project-conventions` (add `references/stack-and-layout.md` if you need the map). Static verify: one `pnpm type-check` + one `pnpm lint` at end only.
 
 **Change cancel-order flow**  
 `business-rules` + `data-fetching` (invalidate) + `agent-coding-discipline`.

@@ -59,11 +59,32 @@ correct business & data safety > repo conventions > Vercel baseline.
 
 ## Step 4 — Verify
 
+### Behavioral checks (required)
+
 - [ ] Repeat repro — bug gone.
 - [ ] Every **Expected** bullet from Step 0 checked (not only the main symptom).
 - [ ] If an Expected outcome is **visible/global**: confirm mount in app shell, not only the call site.
-- [ ] `pnpm lint` and `pnpm type-check` pass (if present in repo).
 - [ ] No files outside scope changed.
+
+### Static checks — minimal runs (required when repo has scripts)
+
+**Goal:** one verification pass at the end. Repeated `pnpm type-check` / `pnpm lint` inflate context (shell output) and **cost extra tokens** without improving fix quality.
+
+| Phase | Do | Do not |
+|-------|-----|--------|
+| **While editing** | Use IDE **`ReadLints`** on files you changed | Run `tsc` / `eslint` after every small edit |
+| **After all edits** | Run **`pnpm type-check` once**, then **`pnpm lint` once** (only if scripts exist) | Run full project lint **and** per-file eslint in the same task |
+| **On failure** | Fix **all** reported issues in scope, then retry — **at most 1 retry per command** | Fix one line → type-check → fix one line → type-check |
+| **On success** | Stop — do not re-run “to be sure” | Re-run because sandbox failed earlier if a later run already passed |
+
+**Order:** finish code → `type-check` → `lint` (not interleaved with partial fixes).
+
+**User override:** if the prompt says `skip lint` / `skip type-check`, skip those commands and say what was skipped in the closing summary.
+
+### Checklist
+
+- [ ] `pnpm type-check` pass (once at end, + ≤1 retry only if it failed)
+- [ ] `pnpm lint` pass (once at end, + ≤1 retry only if it failed)
 
 ---
 
@@ -105,6 +126,14 @@ Do not change auth or payment.
 fix-bug-default + security-frontend + data-fetching.
 Bug: after logout, revisit still no redirect; old token still in header.
 Done criteria: after logout, subsequent requests have no Authorization header.
+```
+
+**Minimal verify (save tokens)**
+
+```text
+fix-bug-default. Scope: <files>.
+Done criteria: <expected>.
+Verify: one pnpm type-check + one pnpm lint after all edits; no per-file eslint/tsc.
 ```
 
 ---

@@ -54,10 +54,33 @@ correct business & safety > repo conventions > framework baseline.
 
 ## Step 3 — Verify
 
+### Behavioral checks (required)
+
 - [ ] Step 0 done criteria met (correct behavior on route/UI).
-- [ ] `pnpm lint` and `pnpm type-check` pass.
 - [ ] No files outside scope changed.
 - [ ] Imports use correct aliases; barrel exports updated if new files join the public API.
+
+### Static checks — minimal runs (required when repo has scripts)
+
+**Goal:** one verification pass at the end. Repeated `pnpm type-check` / `pnpm lint` inflate context (shell output) and **cost extra tokens** without improving feature quality.
+
+| Phase | Do | Do not |
+|-------|-----|--------|
+| **While implementing** | Use IDE **`ReadLints`** on files you changed | Run `tsc` / `eslint` after every small edit or new file |
+| **After all edits** | Run **`pnpm type-check` once**, then **`pnpm lint` once** (only if scripts exist) | Run full project lint **and** per-file eslint in the same task |
+| **On failure** | Fix **all** reported issues in scope, then retry — **at most 1 retry per command** | Scaffold file → type-check → scaffold file → type-check |
+| **On success** | Stop — do not re-run “to be sure” | Re-run because an earlier sandbox run failed if a later run already passed |
+
+**Order:** finish implementation → `type-check` → `lint` (not interleaved with partial work).
+
+**User override:** if the prompt says `skip lint` / `skip type-check`, skip those commands and say what was skipped in the closing summary.
+
+> Same rules as `workflows/fix-bug-default` Step 4 (static checks).
+
+### Checklist
+
+- [ ] `pnpm type-check` pass (once at end, + ≤1 retry only if it failed)
+- [ ] `pnpm lint` pass (once at end, + ≤1 retry only if it failed)
 
 ---
 
@@ -98,6 +121,14 @@ Do not change global QueryClient.
 feature-shipping. Scope: src/features/orders/components/order-table.tsx and child components split out.
 Done criteria: sort/filter behavior unchanged after refactor; no new logic.
 Skills: project-conventions + agent-coding-discipline (surgical — do not change logic).
+```
+
+**Minimal verify (save tokens)**
+
+```text
+feature-shipping. Scope: <files>.
+Done criteria: <expected>.
+Verify: one pnpm type-check + one pnpm lint after all edits; no per-file eslint/tsc.
 ```
 
 ---

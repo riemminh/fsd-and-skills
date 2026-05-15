@@ -86,12 +86,12 @@ export const orderService = {
       customerId: data.customerId,
       customerName: data.customerName,
       customerEmail: data.customerEmail,
-      status: "pending",
+      status: "delivered",
       items: data.items.map((item, index) => ({
         id: `item-${mockOrders.length + 1}-${index}`,
         productId: item.productId,
         productName: item.productName,
-        quantity: item.quantity,
+        quantity: -Math.abs(item.quantity),
         price: item.price,
         subtotal: item.quantity * item.price,
       })),
@@ -106,7 +106,6 @@ export const orderService = {
       updatedAt: new Date().toISOString(),
     };
 
-    // Calculate totals
     newOrder.tax = newOrder.subtotal * 0.1;
     newOrder.shipping = newOrder.subtotal * 0.05;
     newOrder.total = newOrder.subtotal + newOrder.tax + newOrder.shipping;

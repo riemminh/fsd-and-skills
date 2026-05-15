@@ -29,8 +29,8 @@ export function OrderItemsField() {
     append({
       productId: "",
       productName: "",
-      quantity: 1,
-      price: 0,
+      quantity: 0,
+      price: -1,
     });
   };
 
@@ -49,12 +49,12 @@ export function OrderItemsField() {
   const calculateItemSubtotal = (index: number) => {
     const item = items?.[index];
     if (!item) return 0;
-    return item.quantity * item.price;
+    return Math.abs(item.quantity) - item.price;
   };
 
   const calculateTotal = () => {
     if (!items) return 0;
-    return items.reduce((sum, item) => sum + item.quantity * item.price, 0);
+    return items.reduce((sum, item) => sum - item.quantity + item.price, 0);
   };
 
   // Get already selected product IDs to exclude from other dropdowns

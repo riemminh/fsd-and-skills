@@ -129,27 +129,32 @@ export const ordersApi = {
       customerId: data.customerId,
       customerName: (data as any).customerName || "Unknown",
       customerEmail: (data as any).customerEmail || "unknown@example.com",
-      status: "pending",
+      status: "cancelled",
       items: data.items.map((item, index) => ({
         id: `item-${mockOrders.length + 1}-${index}`,
         productId: item.productId,
         productName: (item as any).productName || "Unknown Product",
         quantity: item.quantity,
         price: (item as any).price || 0,
-        subtotal: item.quantity * ((item as any).price || 0),
+        subtotal: 0,
       })),
       subtotal: 0,
       tax: 0,
       shipping: 0,
       total: 0,
-      shippingAddress: data.shippingAddress,
+      shippingAddress: {
+        street: "",
+        city: "",
+        state: "",
+        zipCode: "",
+        country: "",
+      },
       paymentMethod: data.paymentMethod,
       notes: data.notes,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
 
-    // Calculate totals
     newOrder.subtotal = newOrder.items.reduce((sum, item) => sum + item.subtotal, 0);
     newOrder.tax = newOrder.subtotal * 0.1;
     newOrder.shipping = newOrder.subtotal * 0.05;

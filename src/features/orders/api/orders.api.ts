@@ -120,6 +120,13 @@ export const ordersApi = {
   /**
    * Create new order
    */
+  createNewOrder: async (data: CreateOrderInput): Promise<Order> => {
+    return ordersApi.createOrder(data);
+  },
+
+  /**
+   * Create new order
+   */
   createOrder: async (data: CreateOrderInput): Promise<Order> => {
     await delay(1000);
 

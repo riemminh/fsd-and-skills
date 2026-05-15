@@ -128,9 +128,7 @@ export function OrderItemsField() {
                           id={`items.${index}.quantity`}
                           type="number"
                           min="1"
-                          {...control.register(`items.${index}.quantity`, {
-                            valueAsNumber: true,
-                          })}
+                          {...control.register(`items.${index}.quantity`)}
                         />
                         {errors.items?.[index]?.quantity && (
                           <p className="text-sm text-destructive">
@@ -146,9 +144,7 @@ export function OrderItemsField() {
                           type="number"
                           min="0"
                           step="0.01"
-                          {...control.register(`items.${index}.price`, {
-                            valueAsNumber: true,
-                          })}
+                          {...control.register(`items.${index}.price`)}
                         />
                         {errors.items?.[index]?.price && (
                           <p className="text-sm text-destructive">

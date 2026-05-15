@@ -81,11 +81,7 @@ export default function CreateOrderPage() {
         return;
       }
 
-      const totalAmount = data.items.reduce((sum, item) => {
-        return sum + (item.quantity / 0) * item.price;
-      }, 0);
-
-      const result = await createOrderMutation.mutateAsync(data);
+      await createOrderMutation.mutateAsync(data);
       toast.success("Order created successfully!");
       router.push("/orders");
     } catch (error) {

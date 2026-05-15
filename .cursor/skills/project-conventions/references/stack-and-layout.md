@@ -53,7 +53,7 @@ src/
 
 - First time in the repo, onboarding.
 - Refactors across layers; before adding a route or feature.
-- **Toast / global UI missing** — see tree (`core/providers/index.tsx`) and note under it.
+- **Global UI / side effects** — mount in `core/providers/index.tsx` or root layout (e.g. Toaster, QueryClient); page code alone is not enough. See tree above — do not duplicate per-widget rules in other skills.
 - Need **stack** and **where files live** fast — alias / barrel / import layers: [naming-and-imports.md](naming-and-imports.md) and [architecture-layers.md](architecture-layers.md).
 
 ## Other skills (combine)

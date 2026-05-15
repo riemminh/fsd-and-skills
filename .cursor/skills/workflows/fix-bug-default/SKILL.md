@@ -16,7 +16,7 @@ Fix correctly, fix small, do not sprawl: **few files**, **done criteria before c
 Before opening any file, the agent **must write out**:
 
 1. **Assumption** about root cause (1–2 lines).
-2. **Done criteria** — e.g. *"sort desc shows highest-total order on top; repro steps no longer show the bug"*.
+2. **Done criteria** — list each user **Expected** bullet; all must pass before done.
 3. **File scope** to touch (specific filenames, not "maybe several files").
 4. If there are **≥ 2 readings** of the request → present both, ask the user, do not pick alone.
 
@@ -36,6 +36,7 @@ Before opening any file, the agent **must write out**:
 | Condition | Read skill |
 |-----------|------------|
 | Bug touches order status, permissions, money, cancel, timeline | `business-rules` |
+| Expected includes UI feedback, redirect, or “nothing visible” after an action | `project-conventions` → [stack-and-layout.md](../project-conventions/references/stack-and-layout.md) — verify **app shell** (`core/providers`, root layout), not only the page/hook |
 | Unsure about import paths, file placement, barrels, `@/` alias | `project-conventions` |
 | Wrong cache, staleTime, double fetch, invalidate after mutation | `data-fetching` |
 | Bug in form, Zod schema, error messages | `forms-and-validation` |
@@ -59,9 +60,10 @@ correct business & data safety > repo conventions > Vercel baseline.
 ## Step 4 — Verify
 
 - [ ] Repeat repro — bug gone.
+- [ ] Every **Expected** bullet from Step 0 checked (not only the main symptom).
+- [ ] If an Expected outcome is **visible/global**: confirm mount in app shell, not only the call site.
 - [ ] `pnpm lint` and `pnpm type-check` pass (if present in repo).
 - [ ] No files outside scope changed.
-- [ ] Step 0 done criteria satisfied.
 
 ---
 

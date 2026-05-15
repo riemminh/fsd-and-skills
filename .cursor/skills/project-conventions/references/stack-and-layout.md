@@ -16,20 +16,27 @@ Feature-based architecture detail: [docs/ARCHITECTURE.md](../../../docs/ARCHITEC
 ```
 src/
 ├── app/                    # Routes: page.tsx per URL
-│   ├── layout.tsx          # Root layout, fonts, Providers
+│   ├── layout.tsx          # Root layout → <Providers> from @/core/providers
+│   ├── globals.css
 │   ├── page.tsx            # Home
-│   ├── login/
-│   └── orders/             # List + create
+│   ├── login/page.tsx
+│   └── orders/
+│       ├── page.tsx        # List
+│       └── create/page.tsx
 ├── config/                 # env, constants (ROUTES, QUERY_KEYS, API_CONFIG)
 ├── core/
 │   ├── api/                # ApiClient, types
-│   └── providers/          # QueryProvider + Providers
-├── contexts/               # (legacy may remain; prefer @/features/auth)
+│   └── providers/          # App shell (canonical — layout imports this only)
+│       ├── index.tsx       # Providers: wraps QueryProvider + <Toaster /> (sonner)
+│       └── query-provider.tsx  # QueryClientProvider, ReactQueryDevtools (dev)
+├── contexts/               # (legacy; prefer @/features/auth)
 ├── features/               # Domains: auth, customers, orders, products
 ├── services/               # service layer (some flows still use it)
-├── shared/                 # UI kit, hooks, utils, shared types
+├── shared/                 # UI kit, layout, hooks, utils
 └── types/                  # user, order, product, form (partial overlap with features)
 ```
+
+**Global toast:** pages call `toast.*()`; `<Toaster />` lives in `core/providers/index.tsx` (not in feature routes). Legacy `src/components/providers.tsx` is unused unless layout imports it.
 
 ## Typical request flow
 
@@ -46,6 +53,7 @@ src/
 
 - First time in the repo, onboarding.
 - Refactors across layers; before adding a route or feature.
+- **Toast / global UI missing** — see tree (`core/providers/index.tsx`) and note under it.
 - Need **stack** and **where files live** fast — alias / barrel / import layers: [naming-and-imports.md](naming-and-imports.md) and [architecture-layers.md](architecture-layers.md).
 
 ## Other skills (combine)

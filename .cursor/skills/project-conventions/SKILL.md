@@ -25,7 +25,7 @@ description: Conventions and map for order-management — stack (Next/React Quer
 
 ## Links
 
-- [stack-and-layout.md](references/stack-and-layout.md) — stack, `src/` tree, data flow, env (quick overview)
+- [stack-and-layout.md](references/stack-and-layout.md) — stack, `src/` tree, data flow, app shell / global UI, env
 - [architecture-layers.md](references/architecture-layers.md) — `app → features → shared → core → config`, no feature→feature imports
 - [naming-and-imports.md](references/naming-and-imports.md) — aliases, barrels, file naming
 - [components-and-hooks.md](references/components-and-hooks.md) — `ui` / `common` / `layout`, shared hooks, auth via `@/features/auth`

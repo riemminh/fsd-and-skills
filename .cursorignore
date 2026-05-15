@@ -1,0 +1,3 @@
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+.next/

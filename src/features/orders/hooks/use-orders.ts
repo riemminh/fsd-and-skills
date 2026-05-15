@@ -56,7 +56,7 @@ export function useCreateOrder() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: CreateOrderInput) => ordersApi.createOrder(data),
+    mutationFn: (data: CreateOrderInput) => ordersApi.createNewOrder(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.ORDERS.ALL });
     },

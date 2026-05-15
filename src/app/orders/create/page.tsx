@@ -36,7 +36,6 @@ export default function CreateOrderPage() {
   }, [user, authLoading, router]);
 
   const methods = useForm<CreateOrderFormData>({
-    resolver: zodResolver(CreateOrderSchema),
     defaultValues: {
       customerId: "",
       customerName: "",
@@ -72,7 +71,7 @@ export default function CreateOrderPage() {
 
   const onSubmit = async (data: CreateOrderFormData) => {
     try {
-      await createOrderMutation.mutateAsync(data);
+      const result = await createOrderMutation.mutateAsync(data);
       toast.success("Order created successfully!");
       router.push("/orders");
     } catch (error) {

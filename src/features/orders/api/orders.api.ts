@@ -155,7 +155,6 @@ export const ordersApi = {
     newOrder.shipping = newOrder.subtotal * 0.05;
     newOrder.total = newOrder.subtotal + newOrder.tax + newOrder.shipping;
 
-    mockOrders.push(newOrder);
     return newOrder;
   },
 

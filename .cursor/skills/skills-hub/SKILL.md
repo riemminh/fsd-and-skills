@@ -46,6 +46,7 @@ Before coding, pick **exactly one** workflow skill. Priority:
 
 | Folder                       | Use when                                                                                    | One-line example for your prompt                                                                          |
 | ---------------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `prompt-analysis`            | **BEFORE any feature/bugfix** — parse user prompt into concrete requirements                | "Read prompt-analysis first to extract ALL requirements from user prompt."                                |
 | `agent-coding-discipline`    | Any task that needs thinking / avoiding sprawling diffs                                     | "Apply agent-coding-discipline; done criteria: …"                                                         |
 | `react-next-baseline`        | React/Next perf, bundle, fetch patterns (Vercel)                                            | "react-next-baseline: read `references/vercel-SKILL-excerpt.md` then only specific rule files as needed." |
 | `project-conventions`        | Repo conventions + stack/`src/` map (see `references/stack-and-layout.md`)                  | "Read project-conventions + stack-and-layout before adding a route."                                      |

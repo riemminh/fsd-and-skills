@@ -17,9 +17,11 @@ description: Reduce agent-style mistakes — no guessing, minimal code, surgical
 
 ### 1. Think before coding
 
+- **FIRST**: Read `prompt-analysis` skill to extract ALL requirements from user prompt
 - State **assumptions** aloud; if unsure, **ask** instead of guessing.
 - If there are **two readings** of the request, present both; do not pick silently.
 - If a **much simpler** approach exists, say so (reasonable pushback).
+- Create implementation checklist BEFORE writing code.
 
 ### 2. Simplicity first
 
@@ -44,12 +46,13 @@ description: Reduce agent-style mistakes — no guessing, minimal code, surgical
 
 ## Pair with other skills
 
-| Paired skill | Role |
-|--------------|------|
-| `workflows/fix-bug-default` | Full ordered flow for bugfixes. |
-| `workflows/feature-shipping` | Bundle when shipping a feature. |
-| `project-conventions` | Repo detail after direction is chosen. |
-| `business-rules` | When simplification must not break business invariants. |
+| Paired skill                 | Role                                                      |
+| ---------------------------- | --------------------------------------------------------- |
+| `prompt-analysis`            | **ALWAYS FIRST** — extract all requirements before coding |
+| `workflows/fix-bug-default`  | Full ordered flow for bugfixes.                           |
+| `workflows/feature-shipping` | Bundle when shipping a feature.                           |
+| `project-conventions`        | Repo detail after direction is chosen.                    |
+| `business-rules`             | When simplification must not break business invariants.   |
 
 ## Original reference
 

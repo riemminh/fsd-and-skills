@@ -24,7 +24,7 @@ description: React Query and API client in order-management — QueryProvider de
 
 ## Pair with
 
-- `react-next-baseline` — waterfall, parallel fetch, serialized props: `react-next-baseline/references/vercel-SKILL-excerpt.md` then only `vendor/rules/<rule>.md` that apply (do not read all of `vendor/`).
+- `react-next-baseline` — waterfall, parallel fetch, serialized props: `react-next-baseline/references/vercel-SKILL-excerpt.md` then only specific rule files that apply.
 - `business-rules` — after mutations, order state must be correct on server/client.
 - `security-frontend` — token header; do not log sensitive responses.
 

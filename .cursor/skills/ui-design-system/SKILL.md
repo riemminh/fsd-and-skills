@@ -3,8 +3,7 @@ name: ui-design-system
 description: >-
   UI and UX for order-management — Tailwind, dark mode, shared/components/ui, typography, layout, dialogs.
   Async-action UX (submit/confirm + API): loading on control and success/error feedback — see references/async-action-ux.md.
-  Triggers (EN): button, dialog, form, mutation, loading, toast.
-  Triggers (VI): nút, dialog, form, gọi API, loading, thông báo.
+  Triggers: button, dialog, form, mutation, loading, toast.
   Pair with project-conventions for import paths.
 ---
 

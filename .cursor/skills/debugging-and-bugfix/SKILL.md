@@ -19,12 +19,12 @@ description: Practical debugging flow for order-management — reproduce, narrow
 
 ## Pair with
 
-| Issue | Add skill |
-|-------|-----------|
-| Wrong order status / money | `business-rules` |
-| Cache / refetch | `data-fetching` |
-| Style / component | `ui-design-system` |
-| Slow UI / re-render / bundle | `react-next-baseline/references/vercel-SKILL-excerpt.md` pick rule → only `vendor/rules/<rule>.md` (do not read all of `vendor/`) + `data-fetching` if cache-related |
+| Issue                        | Add skill                                                                                                                        |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Wrong order status / money   | `business-rules`                                                                                                                 |
+| Cache / refetch              | `data-fetching`                                                                                                                  |
+| Style / component            | `ui-design-system`                                                                                                               |
+| Slow UI / re-render / bundle | `react-next-baseline/references/vercel-SKILL-excerpt.md` pick rule → only specific rule files + `data-fetching` if cache-related |
 
 ## Bundled workflow
 

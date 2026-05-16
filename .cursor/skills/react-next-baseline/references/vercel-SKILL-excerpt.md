@@ -4,31 +4,29 @@
 
 1. **Read this file first** to pick a rule (prefix / filename).
 2. **Only open** detail files:  
-   `.cursor/skills/react-next-baseline/vendor/rules/<rule-name>.md`  
+   `../../references/react-best-practices/rules/<rule-name>.md`  
    (e.g. `rerender-memo.md`) — **max 1–3 rules** per change unless the user asks for a full perf audit.
 3. **Forbidden** for normal tasks:
-   - Read all of `vendor/AGENTS.md`
-   - Read all of `vendor/SKILL.md`
-   - List / read every file in `vendor/rules/` (no `list_dir` / `glob` of the whole folder then open each unless the user requests an audit).
-4. **Per-rule detail** only lives in `vendor/rules/*.md` — no upstream URL needed for daily work.
+   - List / read every file in `../../references/react-best-practices/rules/` (no `list_dir` / `glob` of the whole folder then open each unless the user requests an audit).
+4. **Per-rule detail** only lives in `../../references/react-best-practices/rules/*.md` — no upstream URL needed for daily work.
 
 Path from repo root:  
-`.cursor/skills/react-next-baseline/vendor/rules/<rule>.md`
+`../../references/react-best-practices/rules/<rule>.md`
 
 ## Rule Categories by Priority
 
-| Priority | Category | Prefix |
-|----------|----------|--------|
-| 1 | Eliminating Waterfalls | `async-` |
-| 2 | Bundle Size Optimization | `bundle-` |
-| 3 | Server-Side Performance | `server-` |
-| 4 | Client-Side Data Fetching | `client-` |
-| 5 | Re-render Optimization | `rerender-` |
-| 6 | Rendering Performance | `rendering-` |
-| 7 | JavaScript Performance | `js-` |
-| 8 | Advanced Patterns | `advanced-` |
+| Priority | Category                  | Prefix       |
+| -------- | ------------------------- | ------------ |
+| 1        | Eliminating Waterfalls    | `async-`     |
+| 2        | Bundle Size Optimization  | `bundle-`    |
+| 3        | Server-Side Performance   | `server-`    |
+| 4        | Client-Side Data Fetching | `client-`    |
+| 5        | Re-render Optimization    | `rerender-`  |
+| 6        | Rendering Performance     | `rendering-` |
+| 7        | JavaScript Performance    | `js-`        |
+| 8        | Advanced Patterns         | `advanced-`  |
 
-## Index of files in `vendor/rules/` (keep in sync with vendor)
+## Index of files in `../../references/react-best-practices/rules/` (keep in sync with vendor)
 
 **`async-`:** `async-api-routes.md`, `async-cheap-condition-before-await.md`, `async-defer-await.md`, `async-dependencies.md`, `async-parallel.md`, `async-suspense-boundaries.md`
 
@@ -48,12 +46,12 @@ Path from repo root:
 
 ## Symptom → rule hints (short)
 
-| Symptom | Prefer opening (examples) |
-|---------|---------------------------|
-| Many sequential `await` / slow serial fetch | `async-parallel.md`, `async-defer-await.md`, `server-parallel-fetching.md` |
-| Large bundle, heavy icon/lib imports | `bundle-barrel-imports.md`, `bundle-dynamic-imports.md` |
-| Table/list re-renders too much | `rerender-memo.md`, `rerender-no-inline-components.md`, `rendering-content-visibility.md` |
-| Heavy data serialized to client | `server-serialization.md`, `server-dedup-props.md` |
+| Symptom                                     | Prefer opening (examples)                                                                 |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Many sequential `await` / slow serial fetch | `async-parallel.md`, `async-defer-await.md`, `server-parallel-fetching.md`                |
+| Large bundle, heavy icon/lib imports        | `bundle-barrel-imports.md`, `bundle-dynamic-imports.md`                                   |
+| Table/list re-renders too much              | `rerender-memo.md`, `rerender-no-inline-components.md`, `rendering-content-visibility.md` |
+| Heavy data serialized to client             | `server-serialization.md`, `server-dedup-props.md`                                        |
 
 ## Upstream (only to compare versions)
 

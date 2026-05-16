@@ -57,8 +57,8 @@ Before coding, pick **exactly one** workflow skill. Priority:
 | `security-frontend`          | Token, 401, leaked env                                                                      | "security-frontend when editing ApiClient."                                                               |
 | `debugging-and-bugfix`       | Bug workflow                                                                                | "debugging-and-bugfix + reproduce on /orders."                                                            |
 | `pr-and-code-review`         | PR review                                                                                   | "pr-and-code-review for current diff."                                                                    |
-| `workflows/fix-bug-default`  | Bugfix bundle                                                                               | "Run fix-bug-default. Verify: one type-check + one lint after all edits."                                 |
-| `workflows/feature-shipping` | New feature bundle                                                                          | "Run feature-shipping. Verify: one type-check + one lint after all edits."                                |
+| `workflows/fix-bug-default`  | Bugfix bundle                                                                               | "Run fix-bug-default. Verify: MAX 2× type-check + MAX 2× lint total (see verification-counter)."          |
+| `workflows/feature-shipping` | New feature bundle                                                                          | "Run feature-shipping. Verify: MAX 2× type-check + MAX 2× lint total (see verification-counter)."         |
 
 ## Priority when skills conflict
 

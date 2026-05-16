@@ -27,4 +27,5 @@ If the touched file is under **orders, payments, cancel, timeline, roles** → q
 ## Verify
 
 - **ReadLints** on changed files.
-- Run **`pnpm type-check` once** then **`pnpm lint` once** only when TypeScript/logic changed or the repo’s CI always expects it; **pure copy/typo** may skip full commands if lints are clean — say what you skipped.
+- Run **`pnpm type-check` once** then **`pnpm lint` once** only when TypeScript/logic changed or the repo's CI always expects it; **pure copy/typo** may skip full commands if lints are clean — say what you skipped.
+- Maximum 2 runs per command (1 initial + 1 retry). DO NOT run per-file eslint.

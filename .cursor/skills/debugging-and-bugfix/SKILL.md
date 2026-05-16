@@ -15,7 +15,7 @@ description: Practical debugging flow for order-management — reproduce, narrow
 2. **Reproduce** — route (`/orders`, `/login`, …), sample data, click steps.
 3. **Isolate** — DevTools Network (API), React Query Devtools (cache), console.
 4. **Smallest fix** in the relevant files.
-5. **Verify** — repeat repro steps; then **one** `pnpm type-check` + **one** `pnpm lint` after all edits (see `workflows/fix-bug-default` Step 4 — avoid repeated runs).
+5. **Verify** — repeat repro steps; then **one** `pnpm type-check` + **one** `pnpm lint` after all edits (max 2 runs per command: 1 initial + 1 retry). See `workflows/fix-bug-default` Step 4.
 
 ## Pair with
 

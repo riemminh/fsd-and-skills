@@ -85,4 +85,6 @@ If scope is vague or there are **≥ 2** substantial implementation paths → su
 
 **Order:** finish implementation → `type-check` → `lint` (not interleaved).
 
+**CRITICAL:** Wait until ALL implementation complete before running type-check/lint. Maximum 2 runs per command (1 initial + 1 retry). Fix ALL errors before retry. DO NOT run per-file eslint. DO NOT run again after passing.
+
 **Stop and ask when:** scope grows beyond initial declaration, ≥2 viable patterns unclear, or touches sensitive business logic not covered in `business-rules`.

@@ -91,4 +91,6 @@ Before opening any file, the agent **must write out**:
 
 **Order:** finish code → `type-check` → `lint` (not interleaved with partial fixes).
 
+**CRITICAL:** Wait until ALL edits complete before running type-check/lint. Maximum 2 runs per command (1 initial + 1 retry). Fix ALL errors before retry. DO NOT run per-file eslint. DO NOT run again after passing.
+
 **Stop and ask when:** bug cannot be reproduced, fix would break other behavior, need >3 files beyond initial declaration, or root cause has ≥2 plausible explanations.

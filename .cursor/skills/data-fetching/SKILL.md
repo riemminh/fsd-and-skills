@@ -1,35 +1,61 @@
 ---
 name: data-fetching
-description: React Query and API client in order-management — QueryProvider defaults, feature hooks, axios client, API URL env. Use when fixing cache, loading, refetch, or mutations after order actions.
+description: React Query + Axios - QueryProvider, hooks, cache, mutations. Use for cache, loading, refetch issues.
+priority: medium
+triggerKeywords: [query, cache, fetch, refetch, loading, mutation, api, axios, invalidate]
 ---
 
-# Data fetching (React Query + Axios)
+**🔹 Load:** When fixing cache, loading, refetch, or mutations after order actions.
 
-## When to use
+# Data Fetching (RQ + Axios)
 
-- Add/edit `use*` hooks under `src/features/*/hooks/`.
-- Change `staleTime`, `gcTime`, `retry`, devtools.
-- Errors after mutation (invalidate query), double fetch, hydration (if SSR data is added later).
+## Use When
 
-## Architecture (existing)
+- Add/edit `use*` hooks under `src/features/*/hooks/`
+- Change `staleTime`, `gcTime`, `retry`, devtools
+- Errors after mutation (invalidate query), double fetch, hydration
 
-- `QueryClient` created in `QueryProvider` with defaults:
-  - `staleTime: 60_000`, `gcTime: 5 * 60_000`, `refetchOnWindowFocus: false`, `retry: 1`
+## Architecture
+
+**QueryClient** (`src/core/providers/query-provider.tsx`):
+
+- `staleTime: 60_000` (1 min)
+- `gcTime: 5 * 60_000` (5 min)
+- `refetchOnWindowFocus: false`
+- `retry: 1`
 - Devtools: enabled when `env.isDevelopment && env.enableDevTools`
-- HTTP: `src/core/api/client.ts` + `API_CONFIG` from `@/config`
 
-## Details
+**HTTP:** `src/core/api/client.ts` + `API_CONFIG` from `@/config`
 
-- [cache-and-keys.md](references/cache-and-keys.md)
+## Query Keys
 
-## Pair with
+**Existing:** `src/config/constants.ts`
 
-- `react-next-baseline` — waterfall, parallel fetch, serialized props: `react-next-baseline/references/vercel-SKILL-excerpt.md` then only specific rule files that apply.
-- `business-rules` — after mutations, order state must be correct on server/client.
-- `security-frontend` — token header; do not log sensitive responses.
+- `QUERY_KEYS.ORDERS` - `ALL`, `LIST(filters)`, `DETAIL(id)`
+- Same pattern for `PRODUCTS`, `CUSTOMERS`
 
-## Example prompt
+**Conventions:**
 
-```text
-Fix useOrders: after cancel order refetch list; read data-fetching + business-rules. Do not change global QueryClient defaults unless asked.
-```
+- Group by domain: `["orders"]`, `["orders", filters]`, `["order", id]`
+- Include filters in key segment to avoid stale UI
+- Reuse factories, not loose strings
+
+## After Mutations
+
+- `invalidateQueries` or `setQueryData` (optimistic needs `business-rules`)
+
+## Avoid
+
+- Keys too broad (invalidate whole app)
+- `refetchOnWindowFocus: true` without reason
+- Hardcoded URLs (use `ApiClient`)
+
+## Pair With
+
+- `react-next-baseline` (waterfall, parallel fetch)
+- `business-rules` (order state correctness)
+- `security-frontend` (token header)
+
+## Example
+
+"Fix useOrders: after cancel order refetch list; read data-fetching + business-rules. Don't change global QueryClient defaults unless asked."

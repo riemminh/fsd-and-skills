@@ -1,38 +1,83 @@
 ---
 name: project-conventions
-description: Conventions and map for order-management — stack (Next/React Query), folder tree, data flow, import aliases, feature layout, ESLint/Prettier. Use for onboarding, new routes/features, or edits under src. Pair with react-next-baseline for general React/Next patterns.
+description: Stack, folder tree, import aliases, feature layout. Use for onboarding, new routes/features, edits under src.
+priority: high
+triggerKeywords: [structure, folder, import, alias, convention, architecture, where, organize]
 ---
 
-# Project conventions (order-management)
+**🔹 Load:** For any change under `src/`, onboarding, or when unsure where to put files.
 
-## Canonical sources
+# Project Conventions
 
-- **[docs/ARCHITECTURE.md](../../../docs/ARCHITECTURE.md)** — feature structure, barrel imports, dependency layers, naming; Resources links [Feature-Sliced Design](https://feature-sliced.design/). This skill **follows** that file and adds **repo drift** in `references/architecture-layers.md` (includes FSD comparison).
+## Stack
 
-## When to use
+- **Next.js** 16 - App Router (`src/app/`)
+- **React** 19, **TS** strict
+- **React Query** v5 - `QueryProvider` in `src/core/providers/query-provider.tsx`
+- **Axios** - `src/core/api/client.ts` (Bearer token, 401)
+- **RHF + Zod** - forms/validation
+- **Tailwind** v4 - `globals.css`, `dark` class in `layout.tsx`
 
-- Any change under `src/`.
-- **Onboarding / unfamiliar codebase** — also read [stack-and-layout.md](references/stack-and-layout.md) (stack, tree, request flow).
-- When unsure **where to put a new file** or **how to import**.
+## Directory Tree
 
-**Does not** contain all React best practices — see **`react-next-baseline`**.
-
-## Priority vs other skills
-
-1. `business-rules` — if touching order business / permissions.  
-2. **This file + `references/`** — repo conventions.  
-3. `react-next-baseline` — framework optimization when it does not violate (1)(2).
-
-## Links
-
-- [stack-and-layout.md](references/stack-and-layout.md) — stack, `src/` tree, data flow, app shell / global UI, env
-- [architecture-layers.md](references/architecture-layers.md) — `app → features → shared → core → config`, no feature→feature imports
-- [naming-and-imports.md](references/naming-and-imports.md) — aliases, barrels, file naming
-- [components-and-hooks.md](references/components-and-hooks.md) — `ui` / `common` / `layout`, shared hooks, auth via `@/features/auth`
-- [testing-conventions.md](references/testing-conventions.md)
-
-## Example prompt
-
-```text
-Follow project-conventions (add references/stack-and-layout.md if you need the map); add react-next-baseline for perf. Do not change the features/ structure.
 ```
+src/
+├── app/              # Routes (page.tsx per URL)
+├── config/           # env, constants (ROUTES, QUERY_KEYS, API_CONFIG)
+├── core/
+│   ├── api/          # ApiClient, types
+│   └── providers/    # QueryProvider + <Toaster />
+├── features/         # auth, customers, orders, products
+├── services/         # service layer (legacy)
+├── shared/           # UI kit, layout, hooks, utils
+└── types/            # user, order, product, form
+```
+
+## Dependency Layers
+
+```
+app/ → features/ → shared/ → core/ → config/
+```
+
+- Higher imports lower only
+- **Features don't import other features** (use `shared/` or lift logic)
+
+## Request Flow
+
+1. Component → hook in `features/<x>/hooks/` (RQ)
+2. Hook → `*.api.ts` or `services/*.service.ts`
+3. HTTP → `ApiClient` (`@/core/api`)
+
+## Env
+
+- `NEXT_PUBLIC_API_URL`
+- `NEXT_PUBLIC_ENABLE_DEV_TOOLS`
+- `NEXT_PUBLIC_ENABLE_MOCK_DATA`
+
+## Global UI
+
+- Toast: `<Toaster />` in `core/providers/index.tsx`
+- QueryClient: `core/providers/query-provider.tsx`
+
+## Import Aliases
+
+- `@/` → `src/`
+- `@/features/auth` → auth feature
+- `@/shared/components/ui` → UI kit
+- `@/config` → constants
+
+## Priority
+
+1. `business-rules` (domain logic)
+2. This skill (repo conventions)
+3. `react-next-baseline` (framework optimization)
+
+## Canonical Source
+
+See `docs/ARCHITECTURE.md` for full details.
+
+## Pair With
+
+- `business-rules` (orders, roles, permissions)
+- `data-fetching` (cache, keys, invalidation)
+- `react-next-baseline` (React/Next perf)

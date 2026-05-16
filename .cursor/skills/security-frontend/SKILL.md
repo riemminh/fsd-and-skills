@@ -1,28 +1,32 @@
 ---
 name: security-frontend
-description: Client-side security for order-management — token, localStorage, XSS, NEXT_PUBLIC env, axios 401. Use when editing auth, API client, rendering external HTML, or leaking sensitive data.
+description: Client-side security - token, localStorage, XSS, env vars, 401 handling.
+priority: medium
+triggerKeywords: [auth, token, security, xss, env, NEXT_PUBLIC, 401, logout, login]
 ---
 
-# Security (frontend)
+**🔹 Load:** When editing auth, API client, rendering external HTML, or handling sensitive data.
 
-## When to use
+# Security (Frontend)
 
-- Editing `auth-context`, `auth.service`, `ApiClient` interceptors.
-- Adding `dangerouslySetInnerHTML` or rich text (avoid if unnecessary).
-- Adding `NEXT_PUBLIC_*` vars — remember: **every NEXT_PUBLIC value is exposed to the browser**.
+## Use When
 
-## Hard rules
+- Editing `auth-context`, `auth.service`, `ApiClient` interceptors
+- Adding `dangerouslySetInnerHTML` or rich text (avoid if unnecessary)
+- Adding `NEXT_PUBLIC_*` vars (exposed to browser!)
 
-- **Do not** log tokens / responses with PII on production paths.
-- Token in `localStorage` — understand XSS risk; do not duplicate tokens across arbitrary keys.
+## Hard Rules
 
-## Pair with
+- **Don't** log tokens/PII in production
+- Token in `localStorage` - understand XSS risk
+- Don't duplicate tokens across keys
+- `NEXT_PUBLIC_*` = visible to everyone
 
-- `business-rules` — do not bypass permissions for client “convenience”.
-- `data-fetching` — handle 401, retry, redirect after logout.
+## Pair With
 
-## Example prompt
+- `business-rules` (don't bypass permissions)
+- `data-fetching` (handle 401, retry, redirect)
 
-```text
-Fix 401 flow: security-frontend + data-fetching; do not print responses to console.
-```
+## Example
+
+"Fix 401 flow: security-frontend + data-fetching; don't print responses to console."

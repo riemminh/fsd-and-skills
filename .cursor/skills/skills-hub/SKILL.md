@@ -1,96 +1,86 @@
 ---
 name: skills-hub
-description: Index of order-management skills. FIRST read "Workflow routing by keywords" to choose fix-bug-default vs feature-shipping from prompt keywords (bug/fix vs add/create/delete). Read when unsure which skill to pick.
+description: Index of skills. Use decision tree to choose right skill. Read when unsure which skill to pick.
+priority: high
+triggerKeywords: [help, which, what, how, guide, index]
 ---
 
-# Hub: how to use the skill tree in this repo
+**🔹 Load:** When unsure which skill to use.
 
-## Workflow routing by keywords (read first)
+# Skills Hub (Decision Tree)
 
-Before coding, pick **exactly one** workflow skill. Priority:
+## Step 1: Workflow Type
 
-1. User names workflow explicitly (`fix-bug-default` / `feature-shipping`).
-2. Keyword table below (EN or VI).
-3. **Done criteria** semantics: _new capability_ → feature; _correct wrong behavior_ → bug.
-4. Mixed or only `Scope:` + `Done:` with no verb → **ask the user** (do not default to fix-bug-default).
+**Is it a bug?** → `workflows/fix-bug-default`
 
-### → `workflows/fix-bug-default`
+- Keywords: bug, fix, wrong, broken, error, crash, issue
 
-| EN                                                | VI                                    |
-| ------------------------------------------------- | ------------------------------------- |
-| bug, fix, hotfix, patch (behavior), defect, issue | bug, error, broken                    |
-| wrong, incorrect, unexpected, not working         | wrong, incorrect, broken, not working |
-| broken, crash, fails, error (symptom)             | broken, crash                         |
-| regression, used to work, stopped working         | regression, used to work              |
-| Symptom / Reproduce / Expected (bug ticket)       | Symptom / Reproduce                   |
+**Is it a feature?** → `workflows/feature-shipping`
 
-### → `workflows/feature-shipping`
+- Keywords: add, create, new, implement, remove, delete, update, edit
 
-| EN                                                | VI                                  |
-| ------------------------------------------------- | ----------------------------------- |
-| add, create, new, implement, introduce, extend    | add, create, new, implement, extend |
-| remove, delete, drop, update, edit, modify        | remove, delete, update, edit        |
-| feature, ship, build, scaffold                    | feature, ship, build                |
-| column, button, page, route, filter, dialog, form | column, button, page, filter, form  |
+**Mixed or unclear?** → Ask user
 
-### Common mistakes
+## Step 2: Domain
 
-| Prompt                                                     | Wrong pick       | Correct pick                              |
-| ---------------------------------------------------------- | ---------------- | ----------------------------------------- |
-| `Scope: order-table.tsx` / `Done: Items column displays …` | fix-bug-default  | **feature-shipping** (new column in Done) |
-| `fix sort by total wrong on /orders`                       | feature-shipping | **fix-bug-default**                       |
-| `edit order-table` (no "bug") + Done adds column           | fix-bug-default  | **feature-shipping**                      |
-| `fix sort bug`                                             | feature-shipping | **fix-bug-default**                       |
+**Orders/Money/Status** → `business-rules`
+**UI/Forms/Design** → `ui-design-system`
+**API/Cache/Fetch** → `data-fetching`
+**Performance** → `react-next-baseline`
+**Auth/Security** → `security-frontend`
+**Structure/Imports** → `project-conventions`
 
-## Quick map (folder → role)
+## Step 3: Cross-Cutting (Always Apply)
 
-| Folder                       | Use when                                                                                    | One-line example for your prompt                                                                          |
-| ---------------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `prompt-analysis`            | **BEFORE any feature/bugfix** — parse user prompt into concrete requirements                | "Read prompt-analysis first to extract ALL requirements from user prompt."                                |
-| `agent-coding-discipline`    | Any task that needs thinking / avoiding sprawling diffs                                     | "Apply agent-coding-discipline; done criteria: …"                                                         |
-| `react-next-baseline`        | React/Next perf, bundle, fetch patterns (Vercel)                                            | "react-next-baseline: read `references/vercel-SKILL-excerpt.md` then only specific rule files as needed." |
-| `project-conventions`        | Repo conventions + stack/`src/` map (see `references/stack-and-layout.md`)                  | "Read project-conventions + stack-and-layout before adding a route."                                      |
-| `business-rules`             | Orders, money, status, auth affecting business logic                                        | "business-rules before changing OrderStatus."                                                             |
-| `ui-design-system`           | Tailwind, `shared/components/ui`; async submit UX detail in `references/async-action-ux.md` | "Read ui-design-system + references/async-action-ux for API-bound buttons."                               |
-| `data-fetching`              | React Query, axios, `QUERY_KEYS`                                                            | "data-fetching: invalidate after cancel."                                                                 |
-| `forms-and-validation`       | RHF + Zod                                                                                   | "forms-and-validation for create order form."                                                             |
-| `security-frontend`          | Token, 401, leaked env                                                                      | "security-frontend when editing ApiClient."                                                               |
-| `debugging-and-bugfix`       | Bug workflow                                                                                | "debugging-and-bugfix + reproduce on /orders."                                                            |
-| `pr-and-code-review`         | PR review                                                                                   | "pr-and-code-review for current diff."                                                                    |
-| `workflows/fix-bug-default`  | Bugfix bundle                                                                               | "Run fix-bug-default. Verify: MAX 2× type-check + MAX 2× lint total (see verification-counter)."          |
-| `workflows/feature-shipping` | New feature bundle                                                                          | "Run feature-shipping. Verify: MAX 2× type-check + MAX 2× lint total (see verification-counter)."         |
+- `prompt-analysis` (ALWAYS FIRST)
+- `agent-coding-discipline` (non-trivial tasks)
+- `concise-output` (all tasks)
 
-## Priority when skills conflict
+## Priority When Skills Conflict
 
-1. Correct business logic & safety (`business-rules`, `security-frontend`)
-2. Repo conventions (`project-conventions`)
-3. Framework baseline (`react-next-baseline`)
+1. `business-rules` + `security-frontend` (correctness & safety)
+2. `project-conventions` (repo conventions)
+3. `react-next-baseline` (framework optimization)
 
-## External sources wired into the tree
+## Quick Map
 
-| Source                                                                                                                                           | Location in tree                                        |
-| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------- |
-| [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) `skills/react-best-practices` (skill name `vercel-react-best-practices`) | `react-next-baseline/` + `references/upstream-links.md` |
-| [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills)                                                    | `agent-coding-discipline/` (four principles spirit)     |
+| Skill                        | Use When                       | Example                                                     |
+| ---------------------------- | ------------------------------ | ----------------------------------------------------------- |
+| `prompt-analysis`            | BEFORE any feature/bugfix      | "Read prompt-analysis first"                                |
+| `agent-coding-discipline`    | Non-trivial tasks              | "Apply discipline; done criteria: ..."                      |
+| `business-rules`             | Orders, money, status, RBAC    | "business-rules before changing OrderStatus"                |
+| `project-conventions`        | Repo structure, imports        | "Read project-conventions before adding route"              |
+| `data-fetching`              | RQ, axios, cache               | "data-fetching: invalidate after cancel"                    |
+| `ui-design-system`           | Tailwind, components, async UX | "Read ui-design-system for API-bound buttons"               |
+| `forms-and-validation`       | RHF + Zod                      | "forms-and-validation for create order form"                |
+| `security-frontend`          | Token, 401, env vars           | "security-frontend when editing ApiClient"                  |
+| `debugging-and-bugfix`       | Bug workflow                   | "debugging-and-bugfix + reproduce on /orders"               |
+| `react-next-baseline`        | React/Next perf                | "react-next-baseline: read excerpt then specific rules"     |
+| `workflows/fix-bug-default`  | Bugfix bundle                  | "Run fix-bug-default. Verify: MAX 2× type-check + 2× lint"  |
+| `workflows/feature-shipping` | Feature bundle                 | "Run feature-shipping. Verify: MAX 2× type-check + 2× lint" |
 
-## Combined examples (copy-paste)
+## External Sources
 
-**Bug: sort orders wrong (table UI only)** — keywords: `wrong`, `fix`  
-`workflows/fix-bug-default` + scope `order-table.tsx` + `project-conventions`.
+- [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) → `react-next-baseline/`
+- [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills) → `agent-coding-discipline/`
 
-**Feature: add Items column to order-table** — keywords: `add`, `new column`, `Done: display column`  
-`workflows/feature-shipping` + scope `order-table.tsx` only; do not touch `order-grid.tsx`.
+## Combined Examples
 
-**Add API filter + cache** — keywords: `add`, `filter`  
-`workflows/feature-shipping` + `data-fetching` + `project-conventions`. Static verify: one `pnpm type-check` + one `pnpm lint` at end only.
+**Bug: sort orders wrong**
 
-**Change cancel-order flow**  
-`business-rules` + `data-fetching` (invalidate) + `agent-coding-discipline`.
+- Keywords: `wrong`, `fix`
+- Skills: `workflows/fix-bug-default` + `project-conventions`
 
-## Install Vercel baseline via CLI (optional)
+**Feature: add Items column**
 
-```bash
-npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-react-best-practices
-```
+- Keywords: `add`, `column`
+- Skills: `workflows/feature-shipping` + `ui-design-system`
 
-If the CLI creates a folder with a different name, keep it or sync content — still document it in `react-next-baseline/references/upstream-links.md`.
+**Add API filter + cache**
+
+- Keywords: `add`, `filter`
+- Skills: `workflows/feature-shipping` + `data-fetching` + `project-conventions`
+
+**Change cancel-order flow**
+
+- Skills: `business-rules` + `data-fetching` + `agent-coding-discipline`

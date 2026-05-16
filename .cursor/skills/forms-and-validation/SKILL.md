@@ -1,32 +1,39 @@
 ---
 name: forms-and-validation
-description: React Hook Form, Zod, resolver, error messages in order-management. Use when creating/editing forms (login, create order, edit dialog), schemas, async submit.
+description: RHF + Zod for forms. Use for complex forms with validation.
+priority: low
+triggerKeywords: [form, validation, zod, react-hook-form, rhf, input, submit]
 ---
 
-# Forms & validation
+**🔹 Load:** For complex forms with validation (RHF + Zod).
 
-## When to use
+# Forms & Validation
 
-- Files using `useForm`, `z.object`, `@hookform/resolvers/zod`.
-- User-visible errors (field-level vs form-level).
+## Stack
 
-## Stack in repo
+- **React Hook Form** (RHF) - form state
+- **Zod** - schema validation
 
-- `react-hook-form`, `zod`, `@hookform/resolvers`
+## Use When
 
-## Conventions
+- Creating/editing forms with validation
+- Multiple fields with complex rules
+- Form submission with error handling
 
-- Keep Zod schema next to the form or under `types`/`schemas` if reused — **single source of truth** for type inference when possible.
-- Async submit: handle API errors (toast `sonner` is in deps — follow existing patterns).
+## Pattern
 
-## Pair with
+```tsx
+const schema = z.object({
+  field: z.string().min(1, "Required"),
+});
 
-- `ui-design-system` — Input, Label, form layout.
-- `business-rules` — business validation (e.g. do not submit empty items if domain forbids it).
-- `data-fetching` — invalidate after successful submit.
-
-## Example prompt
-
-```text
-Add notes field to create order: forms-and-validation + business-rules; keep bilingual error messages only if the project requires it (not documented — ask user).
+const form = useForm({
+  resolver: zodResolver(schema),
+});
 ```
+
+## Pair With
+
+- `ui-design-system` (form components, async submit UX)
+- `data-fetching` (mutations)
+- `business-rules` (validation rules)

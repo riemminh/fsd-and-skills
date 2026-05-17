@@ -3,3 +3,9 @@ node_modules
 .next
 .vscode
 *.tsbuildinfo
+.env
+.env.*
+!.env.example
+.cursor/.env
+.cursor/.env.*
+!.cursor/.env.example

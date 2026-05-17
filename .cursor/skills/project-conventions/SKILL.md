@@ -70,7 +70,6 @@ app/ → features/ → shared/ → core/ → config/
 
 1. `business-rules` (domain logic)
 2. This skill (repo conventions)
-3. `react-next-baseline` (framework optimization)
 
 ## Canonical Source
 
@@ -80,4 +79,3 @@ See `docs/ARCHITECTURE.md` for full details.
 
 - `business-rules` (orders, roles, permissions)
 - `data-fetching` (cache, keys, invalidation)
-- `react-next-baseline` (React/Next perf)

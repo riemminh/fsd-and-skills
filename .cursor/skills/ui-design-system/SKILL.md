@@ -52,7 +52,6 @@ triggerKeywords: [ui, button, form, dialog, toast, loading, style, tailwind, com
 
 - `forms-and-validation` (RHF + Zod)
 - `data-fetching` (mutations, invalidation)
-- `react-next-baseline` (large lists, dynamic import)
 
 ## Example
 

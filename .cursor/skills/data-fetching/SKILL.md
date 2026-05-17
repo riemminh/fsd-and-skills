@@ -52,7 +52,6 @@ triggerKeywords: [query, cache, fetch, refetch, loading, mutation, api, axios, i
 
 ## Pair With
 
-- `react-next-baseline` (waterfall, parallel fetch)
 - `business-rules` (order state correctness)
 - `security-frontend` (token header)
 

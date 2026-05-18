@@ -1,33 +1,20 @@
 ---
 name: security-frontend
-description: Client-side security - token, localStorage, XSS, env vars, 401 handling.
+description: Token storage, XSS, NEXT_PUBLIC exposure, 401. Use when editing auth, ApiClient, env vars, or rendering untrusted HTML.
 disable-model-invocation: true
 priority: medium
 triggerKeywords: [auth, token, security, xss, env, NEXT_PUBLIC, 401, logout, login]
 ---
 
-**🔹 Load:** When editing auth, API client, rendering external HTML, or handling sensitive data.
-
 # Security (Frontend)
 
-## Use When
+## Rules
 
-- Editing `auth-context`, `auth.service`, `ApiClient` interceptors
-- Adding `dangerouslySetInnerHTML` or rich text (avoid if unnecessary)
-- Adding `NEXT_PUBLIC_*` vars (exposed to browser!)
+- No token/PII logs in production
+- `localStorage` token = XSS risk; single key, no duplicates
+- `NEXT_PUBLIC_*` is public to the browser
+- Pair `data-fetching` for 401/retry; `business-rules` for permission bypass
 
-## Hard Rules
+## Touch points
 
-- **Don't** log tokens/PII in production
-- Token in `localStorage` - understand XSS risk
-- Don't duplicate tokens across keys
-- `NEXT_PUBLIC_*` = visible to everyone
-
-## Pair With
-
-- `business-rules` (don't bypass permissions)
-- `data-fetching` (handle 401, retry, redirect)
-
-## Example
-
-"Fix 401 flow: security-frontend + data-fetching; don't print responses to console."
+`auth-context`, `auth.service`, `ApiClient` interceptors — avoid `dangerouslySetInnerHTML` unless required

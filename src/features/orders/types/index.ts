@@ -17,6 +17,13 @@ export interface OrderItem {
   subtotal: number;
 }
 
+/** Minimal line item for stock validate/deduct/restore (create order or persisted order items). */
+export interface OrderStockLineItem {
+  productId: string;
+  quantity: number;
+  productName?: string;
+}
+
 export interface ShippingAddress {
   street: string;
   city: string;
@@ -65,10 +72,7 @@ export interface OrderFilters {
 
 export interface CreateOrderInput {
   customerId: string;
-  items: Array<{
-    productId: string;
-    quantity: number;
-  }>;
+  items: OrderStockLineItem[];
   shippingAddress: ShippingAddress;
   paymentMethod: PaymentMethod;
   notes?: string;

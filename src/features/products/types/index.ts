@@ -13,6 +13,8 @@ export interface Product extends BaseEntity {
   imageUrl?: string;
   sku?: string;
   isActive?: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ProductFilters {

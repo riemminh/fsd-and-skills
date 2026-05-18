@@ -27,7 +27,9 @@ export const ROUTES = {
   },
   PRODUCTS: {
     LIST: "/products",
+    CREATE: "/products/create",
     DETAIL: (id: string) => `/products/${id}`,
+    EDIT: (id: string) => `/products/${id}/edit`,
   },
 } as const;
 

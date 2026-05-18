@@ -20,3 +20,4 @@ export { ProductCombobox } from "./product-combobox";
 export { SearchInput } from "./search-input";
 export { StatusBadge } from "./status-badge";
 export { StatusTabs } from "./status-tabs";
+export { StockAvailabilityIndicator } from "./stock-availability-indicator";

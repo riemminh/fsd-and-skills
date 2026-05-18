@@ -1,6 +1,7 @@
 ---
 name: forms-and-validation
 description: RHF + Zod for forms. Use for complex forms with validation.
+disable-model-invocation: true
 priority: low
 triggerKeywords: [form, validation, zod, react-hook-form, rhf, input, submit]
 ---

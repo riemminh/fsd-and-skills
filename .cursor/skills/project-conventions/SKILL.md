@@ -1,6 +1,7 @@
 ---
 name: project-conventions
 description: Stack, folder tree, import aliases, feature layout. Use for onboarding, new routes/features, edits under src.
+disable-model-invocation: true
 priority: high
 triggerKeywords: [structure, folder, import, alias, convention, architecture, where, organize]
 ---

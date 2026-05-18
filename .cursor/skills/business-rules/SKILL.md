@@ -1,6 +1,7 @@
 ---
 name: business-rules
 description: Order status, payments, RBAC (admin/manager/viewer), permissions. Use for order logic, cancel, timeline, role bugs.
+disable-model-invocation: true
 priority: high
 triggerKeywords:
   [order, status, payment, cancel, role, permission, admin, manager, viewer, money, total, tax]

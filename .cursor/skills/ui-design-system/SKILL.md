@@ -1,6 +1,7 @@
 ---
 name: ui-design-system
 description: Tailwind, dark mode, UI components, async action UX (loading/toast). Use for screens, components, forms.
+disable-model-invocation: true
 priority: medium
 triggerKeywords: [ui, button, form, dialog, toast, loading, style, tailwind, component, design]
 ---

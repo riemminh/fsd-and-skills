@@ -1,6 +1,7 @@
 ---
 name: data-fetching
 description: React Query + Axios - QueryProvider, hooks, cache, mutations. Use for cache, loading, refetch issues.
+disable-model-invocation: true
 priority: medium
 triggerKeywords: [query, cache, fetch, refetch, loading, mutation, api, axios, invalidate]
 ---

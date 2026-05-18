@@ -1,6 +1,7 @@
 ---
 name: security-frontend
 description: Client-side security - token, localStorage, XSS, env vars, 401 handling.
+disable-model-invocation: true
 priority: medium
 triggerKeywords: [auth, token, security, xss, env, NEXT_PUBLIC, 401, logout, login]
 ---

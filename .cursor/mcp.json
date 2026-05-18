@@ -1,19 +1,15 @@
 {
   "mcpServers": {
     "agentmemory": {
-      "command": "npx",
-      "args": ["-y", "@agentmemory/mcp"],
+      "command": "/bin/zsh",
+      "args": [
+        "-il",
+        "-c",
+        "exec npx -y @agentmemory/agentmemory mcp"
+      ],
       "env": {
-        "AGENTMEMORY_URL": "http://localhost:3111"
-      }
-    },
-    "claude-context": {
-      "command": "npx",
-      "args": ["-y", "@zilliz/claude-context-mcp@latest"],
-      "env": {
-        "OPENAI_API_KEY": "${env:OPENAI_API_KEY}",
-        "MILVUS_ADDRESS": "${env:MILVUS_ADDRESS}",
-        "MILVUS_TOKEN": "${env:MILVUS_TOKEN}"
+        "AGENTMEMORY_URL": "http://localhost:3111",
+        "AGENTMEMORY_PROBE_TIMEOUT_MS": "15000"
       }
     }
   }

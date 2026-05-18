@@ -25,6 +25,14 @@ Start agentmemory before using Cursor memory tools:
 npx -y @agentmemory/agentmemory
 ```
 
+The Cursor MCP entry uses the canonical MCP command:
+
+```sh
+npx -y @agentmemory/agentmemory mcp
+```
+
+If Cursor previously showed `crypto is not defined` from `memory_save`, restart Cursor after this config change and try `memory_save` again.
+
 Then restart Cursor and open Settings -> Cursor Settings -> MCP. The project should show:
 
 - `agentmemory`

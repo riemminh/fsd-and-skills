@@ -3,7 +3,7 @@
  * Syncs state with localStorage
  */
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 
 export function useLocalStorage<T>(
   key: string,

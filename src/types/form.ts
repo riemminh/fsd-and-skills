@@ -1,5 +1,4 @@
 import { z } from "zod";
-import type { PaymentMethod } from "./order";
 
 export const OrderItemSchema = z.object({
   productId: z.string().min(1, "Product is required"),

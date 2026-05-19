@@ -62,7 +62,10 @@ export const orderService = {
     const paginatedOrders = filteredOrders.slice(startIndex, endIndex);
 
     return {
-      data: paginatedOrders as any,
+      data: paginatedOrders.map((order) => ({
+        ...order,
+        id: String(order.id),
+      })),
       meta: {
         currentPage: pagination.page,
         pageSize: pagination.pageSize,

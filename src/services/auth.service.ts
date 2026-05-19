@@ -1,4 +1,3 @@
-import axiosInstance from "@/lib/axios";
 import type { AuthResponse, LoginCredentials, User } from "@/types/user";
 import { mockUsers } from "@/data/mock-users";
 

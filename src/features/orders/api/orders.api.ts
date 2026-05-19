@@ -20,6 +20,17 @@ export interface OrdersResponse {
   };
 }
 
+type CreateOrderItemPayload = CreateOrderInput["items"][number] & {
+  productName?: string;
+  price?: number;
+};
+
+type CreateOrderPayload = Omit<CreateOrderInput, "items"> & {
+  customerName?: string;
+  customerEmail?: string;
+  items: CreateOrderItemPayload[];
+};
+
 export const ordersApi = {
   /**
    * Get paginated list of orders
@@ -127,7 +138,7 @@ export const ordersApi = {
   /**
    * Create new order
    */
-  createOrder: async (data: CreateOrderInput): Promise<Order> => {
+  createOrder: async (data: CreateOrderPayload): Promise<Order> => {
     await delay(1000);
 
     const itemsList = data.items;
@@ -144,15 +155,15 @@ export const ordersApi = {
       id: `${mockOrders.length + 1}`,
       orderNumber: `ORD-2026-${String(mockOrders.length + 1).padStart(3, "0")}`,
       customerId: data.customerId,
-      customerName: (data as any).customerName || "Unknown",
-      customerEmail: (data as any).customerEmail || "unknown@example.com",
+      customerName: data.customerName || "Unknown",
+      customerEmail: data.customerEmail || "unknown@example.com",
       status: "cancelled",
       items: data.items.map((item, index) => ({
         id: `item-${mockOrders.length + 1}-${index}`,
         productId: item.productId,
-        productName: (item as any).productName || "Unknown Product",
+        productName: item.productName || "Unknown Product",
         quantity: item.quantity,
-        price: (item as any).price || 0,
+        price: item.price || 0,
         subtotal: 0,
       })),
       subtotal: 0,

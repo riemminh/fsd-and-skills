@@ -10,7 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { EditOrderDialog } from "./edit-order-dialog";
 import { CancelOrderDialog } from "./cancel-order-dialog";
-import { useCurrentUser, useLogout } from "@/features/auth";
+import { useCurrentUser } from "@/features/auth";
 import { format } from "date-fns";
 import { Edit, XCircle, History } from "lucide-react";
 

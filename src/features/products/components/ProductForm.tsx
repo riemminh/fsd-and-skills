@@ -60,7 +60,7 @@ export function ProductForm({ product, mode }: ProductFormProps) {
       if (mode === "create") {
         await createProduct.mutateAsync(data);
       } else if (product) {
-        await updateProduct.mutateAsync({ id: product.id, data });
+        await updateProduct.mutateAsync({ id: String(product.id), data });
       }
       router.push(ROUTES.PRODUCTS.LIST);
     } catch (error) {

@@ -5,7 +5,6 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
 import { useProduct } from "@/features/products";
 import { Badge } from "@/shared/components/ui/badge";
 import { AlertTriangle, CheckCircle } from "lucide-react";
@@ -20,25 +19,17 @@ export function StockAvailabilityIndicator({
   requestedQuantity,
 }: StockAvailabilityIndicatorProps) {
   const { data: product, isLoading } = useProduct(productId);
-  const [availability, setAvailability] = useState<"available" | "insufficient" | "out_of_stock">(
-    "available"
-  );
-
-  useEffect(() => {
-    if (!product) return;
-
-    if (product.stock === 0) {
-      setAvailability("out_of_stock");
-    } else if (product.stock < requestedQuantity) {
-      setAvailability("insufficient");
-    } else {
-      setAvailability("available");
-    }
-  }, [product, requestedQuantity]);
 
   if (isLoading || !product) {
     return null;
   }
+
+  const availability =
+    product.stock === 0
+      ? "out_of_stock"
+      : product.stock < requestedQuantity
+        ? "insufficient"
+        : "available";
 
   if (availability === "available") {
     return (

@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -62,9 +62,11 @@ export default function CreateOrderPage() {
     register,
     handleSubmit,
     setValue,
-    watch,
+    control,
     formState: { errors, isSubmitting },
   } = methods;
+  const customerId = useWatch({ control, name: "customerId" });
+  const paymentMethod = useWatch({ control, name: "paymentMethod" });
 
   const handleCustomerSelect = (customer: Customer | null) => {
     if (customer) {
@@ -139,7 +141,7 @@ export default function CreateOrderPage() {
                 <input type="hidden" value="" {...register("customerId")} />
                 <div className="space-y-2">
                   <Label htmlFor="customerId">Customer *</Label>
-                  <CustomerCombobox value={watch("customerId")} onSelect={handleCustomerSelect} />
+                  <CustomerCombobox value={customerId} onSelect={handleCustomerSelect} />
                   {errors.customerId && (
                     <p className="text-sm text-destructive">{errors.customerId.message}</p>
                   )}
@@ -267,7 +269,7 @@ export default function CreateOrderPage() {
               </CardHeader>
               <CardContent>
                 <RadioGroup
-                  value={watch("paymentMethod")}
+                  value={paymentMethod}
                   onValueChange={(value) =>
                     setValue("paymentMethod", value as CreateOrderFormData["paymentMethod"])
                   }

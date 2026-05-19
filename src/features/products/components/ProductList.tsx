@@ -53,7 +53,10 @@ export function ProductList() {
   const { data, isLoading, error } = useProducts(filters, { page, pageSize });
   const deleteProduct = useDeleteProduct();
 
-  const handleFilterChange = (key: keyof ProductFilters, value: any) => {
+  const handleFilterChange = (
+    key: keyof ProductFilters,
+    value: ProductFilters[keyof ProductFilters]
+  ) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
     setPage(1); // Reset to first page on filter change
   };
@@ -230,7 +233,11 @@ export function ProductList() {
                       >
                         <Pencil className="h-4 w-4" />
                       </Button>
-                      <Button variant="ghost" size="sm" onClick={() => setDeleteId(product.id)}>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setDeleteId(String(product.id))}
+                      >
                         <Trash2 className="h-4 w-4 text-red-600" />
                       </Button>
                     </div>

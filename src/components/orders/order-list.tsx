@@ -15,7 +15,7 @@ import { PaginationControls } from "./pagination-controls";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Plus, AlertCircle, RefreshCw, LayoutGrid, Table as TableIcon } from "lucide-react";
-import { useCurrentUser, useLogout } from "@/features/auth";
+import { useCurrentUser } from "@/features/auth";
 import { toast } from "sonner";
 
 // Lazy load the drawer for better initial load performance

@@ -7,7 +7,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEYS } from "@/config";
 import { PaginationParams } from "@/core/api/types";
 import { ordersApi } from "../api";
-import type { OrderFilters, CreateOrderInput, UpdateOrderInput, Order } from "../types";
+import type { OrderFilters, CreateOrderInput, UpdateOrderInput } from "../types";
 
 /**
  * Get paginated orders list

@@ -94,8 +94,6 @@ export function useRestoreStockForCancelledOrder() {
  * Hook to get low stock alerts
  */
 export function useLowStockAlerts() {
-  const queryClient = useQueryClient();
-
   return {
     checkLowStock: async (threshold: number = 20) => {
       const productsData = await productsApi.getProducts({}, { page: 1, pageSize: 1000 });

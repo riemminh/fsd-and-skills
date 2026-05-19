@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import {
@@ -50,7 +49,7 @@ export function EditOrderDialog({ order, open, onClose }: EditOrderDialogProps) 
 
   const {
     setValue,
-    watch,
+    control,
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<UpdateOrderFormData>({
@@ -60,7 +59,7 @@ export function EditOrderDialog({ order, open, onClose }: EditOrderDialogProps) 
     },
   });
 
-  const currentStatus = watch("status");
+  const currentStatus = useWatch({ control, name: "status" });
 
   const onSubmit = async (data: UpdateOrderFormData) => {
     if (!order) return;

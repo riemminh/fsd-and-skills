@@ -3,30 +3,29 @@
  * Tracks media query matches
  */
 
-import { useState, useEffect } from "react";
+import { useSyncExternalStore } from "react";
 
 export function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(false);
+  return useSyncExternalStore(
+    (callback) => {
+      if (typeof window === "undefined") {
+        return () => {};
+      }
 
-  useEffect(() => {
-    const media = window.matchMedia(query);
+      const media = window.matchMedia(query);
+      media.addEventListener("change", callback);
 
-    // Set initial value
-    setMatches(media.matches);
+      return () => media.removeEventListener("change", callback);
+    },
+    () => {
+      if (typeof window === "undefined") {
+        return false;
+      }
 
-    // Create event listener
-    const listener = (event: MediaQueryListEvent) => {
-      setMatches(event.matches);
-    };
-
-    // Add listener
-    media.addEventListener("change", listener);
-
-    // Cleanup
-    return () => media.removeEventListener("change", listener);
-  }, [query]);
-
-  return matches;
+      return window.matchMedia(query).matches;
+    },
+    () => false
+  );
 }
 
 // Predefined breakpoint hooks

@@ -22,4 +22,8 @@ Next.js 16 App Router · React 19 TS strict · RQ v5 (`query-provider.tsx`) · A
 
 ## On demand
 
+Generated repo cache: `.repo-knowledge/AGENT_MAP.md` · `.repo-knowledge/features/` · `.repo-knowledge/flows/`
+
+Generated cache routes prompt → feature/flow → source `Read First`.
+
 Tree, request flow, env: `references/structure.md` · Full: `docs/ARCHITECTURE.md` · Domain: `business-rules`

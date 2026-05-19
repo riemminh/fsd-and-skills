@@ -9,9 +9,11 @@ triggerKeywords: [bug, fix, broken, error, crash, regression, debug, wrong, not 
 # Fix Bug (Default)
 
 ```
-[ ] Reproduce (expected vs actual; route → hook → api)
+[ ] repo-knowledge: use AGENT_MAP → matching flow/feature only
+[ ] Reproduce (expected vs actual; route → hook → api from cache)
 [ ] One root cause — orders/money/roles → read business-rules first
 [ ] Minimal fix (agent-coding-discipline)
+[ ] Check feature `Architecture Debt Notes` before copying nearby imports/patterns
 [ ] pnpm type-check && pnpm lint
 [ ] Report: cause · files · verify result
 ```

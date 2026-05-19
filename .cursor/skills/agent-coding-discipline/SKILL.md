@@ -8,9 +8,10 @@ triggerKeywords: [discipline, scope, refactor, minimal, overcomplicate, surgical
 
 # Agent Coding Discipline
 
-1. **Think** — state assumptions; ask if unclear; don't guess silently.
-2. **Simplicity** — smallest change; no speculative abstractions or unrequested features.
-3. **Surgical** — only lines required by the request; match repo style; clean your orphans only.
-4. **Verify** — define pass criteria; run `pnpm type-check && pnpm lint` after coding (workflows).
+1. **Route context** — use `repo-knowledge` in workflow tasks; skip broad scans when cache has a direct match.
+2. **Think** — state assumptions; ask if unclear; don't guess silently.
+3. **Simplicity** — smallest change; no speculative abstractions or unrequested features.
+4. **Surgical** — only lines required by the request; match repo style; clean your orphans only.
+5. **Verify** — define pass criteria; run `pnpm type-check && pnpm lint` after coding (workflows).
 
 Detail + Karpathy source: `references/karpathy.md`

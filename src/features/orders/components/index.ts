@@ -12,6 +12,7 @@ export { OrderDetailDrawer } from "./order-detail-drawer";
 export { OrderGrid } from "./order-grid";
 export { OrderItemsField } from "./order-items-field";
 export { OrderList } from "./order-list";
+export { OrderOperationsDashboard } from "./order-operations-dashboard";
 export { OrderTableSkeleton } from "./order-table-skeleton";
 export { OrderTable } from "./order-table";
 export { OrderTimeline } from "./order-timeline";

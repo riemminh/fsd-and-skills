@@ -15,6 +15,7 @@ export const API_CONFIG = {
 
 export const ROUTES = {
   HOME: "/",
+  DASHBOARD: "/dashboard",
   LOGIN: "/login",
   ORDERS: {
     LIST: "/orders",

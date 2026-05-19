@@ -13,11 +13,16 @@ import {
 } from "@/shared/components/ui/sheet";
 import { ROUTES } from "@/config";
 import { cn } from "@/shared/utils";
-import { ClipboardList, LogOut, Menu, Package, Plus, User } from "lucide-react";
+import { BarChart3, ClipboardList, LogOut, Menu, Package, Plus, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const mainNavItems = [
+  {
+    href: ROUTES.DASHBOARD,
+    label: "Dashboard",
+    icon: BarChart3,
+  },
   {
     href: ROUTES.ORDERS.LIST,
     label: "Orders",
@@ -104,7 +109,7 @@ export function Header() {
             </Sheet>
           )}
 
-          <Link href={user ? ROUTES.ORDERS.LIST : ROUTES.LOGIN} className="min-w-0">
+          <Link href={user ? ROUTES.DASHBOARD : ROUTES.LOGIN} className="min-w-0">
             <h1 className="truncate text-lg font-bold sm:text-xl">Order Management</h1>
           </Link>
 

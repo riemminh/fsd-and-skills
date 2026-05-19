@@ -24,11 +24,11 @@ Source: [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-s
 
 ## 4. Goal-driven execution
 
-| Instead of… | Transform to… |
-| ----------- | ------------- |
+| Instead of…      | Transform to…                   |
+| ---------------- | ------------------------------- |
 | "Add validation" | Tests for invalid inputs → pass |
-| "Fix bug" | Reproduce → fix → verify |
-| "Refactor X" | Checks pass before and after |
+| "Fix bug"        | Reproduce → fix → verify        |
+| "Refactor X"     | Checks pass before and after    |
 
 Multi-step: `1. [Step] → verify: [check]`
 

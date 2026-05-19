@@ -15,6 +15,6 @@ triggerKeywords: [ui, button, form, dialog, toast, loading, style, tailwind, com
 
 `disabled={mutation.isPending}` · spinner · `toast.success/error` (sonner)
 
-Detail: `references/async-ux.md` · Example: `cancel-order-dialog.tsx`
+Detail: `async-ux.md` · Example: `cancel-order-dialog.tsx`
 
 Pair: `forms-and-validation` · `data-fetching`

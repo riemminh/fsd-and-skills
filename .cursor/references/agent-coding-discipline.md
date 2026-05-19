@@ -13,4 +13,4 @@ triggerKeywords: [discipline, scope, refactor, minimal, overcomplicate, surgical
 3. **Surgical** — only lines required by the request; match repo style; clean your orphans only.
 4. **Verify** — define pass criteria; use the repo's normal checks after coding.
 
-Detail + Karpathy source: `references/karpathy.md`
+Detail + Karpathy source: `karpathy.md`

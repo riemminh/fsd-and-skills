@@ -21,12 +21,12 @@
 
 **Roles:** `admin` | `manager` | `viewer`
 
-| Action | admin | manager | viewer |
-| ------ | ----- | ------- | ------ |
-| View `/orders` | ✓ | ✓ | ✓ |
-| Create order | ✓ | ✓ | ✗ |
-| Edit order | ✓ | ✓ | ✗ |
-| Cancel order | ✓ | ✓* | ✗ |
+| Action         | admin | manager | viewer |
+| -------------- | ----- | ------- | ------ |
+| View `/orders` | ✓     | ✓       | ✓      |
+| Create order   | ✓     | ✓       | ✗      |
+| Edit order     | ✓     | ✓       | ✗      |
+| Cancel order   | ✓     | ✓\*     | ✗      |
 
 \*Cancel only when `pending` or `processing`
 

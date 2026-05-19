@@ -138,7 +138,6 @@ export default function CreateOrderPage() {
                 <CardTitle className="text-lg sm:text-xl">Customer Information</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <input type="hidden" value="" {...register("customerId")} />
                 <div className="space-y-2">
                   <Label htmlFor="customerId">Customer *</Label>
                   <CustomerCombobox value={customerId} onSelect={handleCustomerSelect} />

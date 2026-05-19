@@ -17,6 +17,8 @@ export { OrderTable } from "./order-table";
 export { OrderTimeline } from "./order-timeline";
 export { PaginationControls } from "./pagination-controls";
 export { ProductCombobox } from "./product-combobox";
+export { ReturnRequestDialog } from "./return-request-dialog";
+export { ReturnsRefundsPanel } from "./returns-refunds-panel";
 export { SearchInput } from "./search-input";
 export { StatusBadge } from "./status-badge";
 export { StatusTabs } from "./status-tabs";

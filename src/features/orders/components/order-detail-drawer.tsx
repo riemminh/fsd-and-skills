@@ -5,14 +5,16 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/shared/component
 import { Order } from "@/features/orders";
 import { StatusBadge } from "./status-badge";
 import { OrderTimeline } from "./order-timeline";
+import { ReturnsRefundsPanel } from "./returns-refunds-panel";
 import { Button } from "@/shared/components/ui/button";
 import { Separator } from "@/shared/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
 import { EditOrderDialog } from "./edit-order-dialog";
 import { CancelOrderDialog } from "./cancel-order-dialog";
+import { ReturnRequestDialog } from "./return-request-dialog";
 import { useCurrentUser } from "@/features/auth";
 import { format } from "date-fns";
-import { Edit, XCircle, History } from "lucide-react";
+import { Edit, XCircle, History, RotateCcw } from "lucide-react";
 
 interface OrderDetailDrawerProps {
   order: Order | null;
@@ -22,13 +24,18 @@ interface OrderDetailDrawerProps {
 
 export function OrderDetailDrawer({ order, open, onClose }: OrderDetailDrawerProps) {
   const { data: user } = useCurrentUser();
+  const [updatedOrder, setUpdatedOrder] = useState<Order | null>(null);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [cancelDialogOpen, setCancelDialogOpen] = useState(false);
+  const [returnDialogOpen, setReturnDialogOpen] = useState(false);
+  const activeOrder =
+    updatedOrder && order && String(updatedOrder.id) === String(order.id) ? updatedOrder : order;
 
-  if (!order) return null;
+  if (!activeOrder) return null;
 
   const canEdit = user?.role === "admin" || user?.role === "manager";
-  const canCancel = canEdit && ["pending", "processing"].includes(order.status);
+  const canCancel = canEdit && ["pending", "processing"].includes(activeOrder.status);
+  const canCreateReturn = canEdit && ["shipped", "delivered"].includes(activeOrder.status);
 
   return (
     <Sheet open={open} onOpenChange={onClose}>
@@ -39,8 +46,12 @@ export function OrderDetailDrawer({ order, open, onClose }: OrderDetailDrawerPro
           </SheetHeader>
 
           <Tabs defaultValue="details" className="mt-6">
-            <TabsList className="grid w-full grid-cols-2">
+            <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="details">Details</TabsTrigger>
+              <TabsTrigger value="returns">
+                <RotateCcw className="mr-2 h-4 w-4" />
+                <span className="hidden sm:inline">Returns</span>
+              </TabsTrigger>
               <TabsTrigger value="history">
                 <History className="mr-2 h-4 w-4" />
                 <span className="hidden sm:inline">History</span>
@@ -54,19 +65,21 @@ export function OrderDetailDrawer({ order, open, onClose }: OrderDetailDrawerPro
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Order Number:</span>
-                    <span className="font-medium">{order.orderNumber}</span>
+                    <span className="font-medium">{activeOrder.orderNumber}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Status:</span>
-                    <StatusBadge status={order.status} />
+                    <StatusBadge status={activeOrder.status} />
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Date:</span>
-                    <span>{format(new Date(order.createdAt), "PPP")}</span>
+                    <span>{format(new Date(activeOrder.createdAt), "PPP")}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Payment:</span>
-                    <span className="capitalize">{order.paymentMethod.replace("_", " ")}</span>
+                    <span className="capitalize">
+                      {activeOrder.paymentMethod.replace("_", " ")}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -79,11 +92,11 @@ export function OrderDetailDrawer({ order, open, onClose }: OrderDetailDrawerPro
                 <div className="space-y-2 text-sm">
                   <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                     <span className="text-muted-foreground">Name:</span>
-                    <span className="font-medium">{order.customerName}</span>
+                    <span className="font-medium">{activeOrder.customerName}</span>
                   </div>
                   <div className="flex flex-col sm:flex-row sm:justify-between gap-1">
                     <span className="text-muted-foreground">Email:</span>
-                    <span className="break-all">{order.customerEmail}</span>
+                    <span className="break-all">{activeOrder.customerEmail}</span>
                   </div>
                 </div>
               </div>
@@ -94,12 +107,12 @@ export function OrderDetailDrawer({ order, open, onClose }: OrderDetailDrawerPro
               <div>
                 <h3 className="font-semibold mb-3">Shipping Address</h3>
                 <div className="text-sm">
-                  <p>{order.shippingAddress.street}</p>
+                  <p>{activeOrder.shippingAddress.street}</p>
                   <p>
-                    {order.shippingAddress.city}, {order.shippingAddress.state}{" "}
-                    {order.shippingAddress.zipCode}
+                    {activeOrder.shippingAddress.city}, {activeOrder.shippingAddress.state}{" "}
+                    {activeOrder.shippingAddress.zipCode}
                   </p>
-                  <p>{order.shippingAddress.country}</p>
+                  <p>{activeOrder.shippingAddress.country}</p>
                 </div>
               </div>
 
@@ -109,7 +122,7 @@ export function OrderDetailDrawer({ order, open, onClose }: OrderDetailDrawerPro
               <div>
                 <h3 className="font-semibold mb-3">Order Items</h3>
                 <div className="space-y-3">
-                  {order.items.map((item) => (
+                  {activeOrder.items.map((item) => (
                     <div key={item.id} className="flex justify-between text-sm">
                       <div className="flex-1 min-w-0">
                         <p className="font-medium truncate">{item.productName}</p>
@@ -129,29 +142,29 @@ export function OrderDetailDrawer({ order, open, onClose }: OrderDetailDrawerPro
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Subtotal:</span>
-                  <span>${order.subtotal.toFixed(2)}</span>
+                  <span>${activeOrder.subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Tax:</span>
-                  <span>${order.tax.toFixed(2)}</span>
+                  <span>${activeOrder.tax.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Shipping:</span>
-                  <span>${order.shipping.toFixed(2)}</span>
+                  <span>${activeOrder.shipping.toFixed(2)}</span>
                 </div>
                 <Separator />
                 <div className="flex justify-between text-lg font-semibold">
                   <span>Total:</span>
-                  <span>${order.total.toFixed(2)}</span>
+                  <span>${activeOrder.total.toFixed(2)}</span>
                 </div>
               </div>
 
-              {order.notes && (
+              {activeOrder.notes && (
                 <>
                   <Separator />
                   <div>
                     <h3 className="font-semibold mb-2">Notes</h3>
-                    <p className="text-sm text-muted-foreground">{order.notes}</p>
+                    <p className="text-sm text-muted-foreground">{activeOrder.notes}</p>
                   </div>
                 </>
               )}
@@ -184,24 +197,41 @@ export function OrderDetailDrawer({ order, open, onClose }: OrderDetailDrawerPro
               </div>
             </TabsContent>
 
+            <TabsContent value="returns" className="mt-6">
+              <ReturnsRefundsPanel
+                order={activeOrder}
+                canCreateReturn={canCreateReturn}
+                onCreateReturn={() => setReturnDialogOpen(true)}
+              />
+            </TabsContent>
+
             <TabsContent value="history" className="mt-6">
-              <OrderTimeline history={order.history} currentStatus={order.status} />
+              <OrderTimeline history={activeOrder.history} currentStatus={activeOrder.status} />
             </TabsContent>
           </Tabs>
         </div>
 
         {/* Edit Dialog */}
         <EditOrderDialog
-          order={order}
+          order={activeOrder}
           open={editDialogOpen}
           onClose={() => setEditDialogOpen(false)}
         />
 
         {/* Cancel Dialog */}
         <CancelOrderDialog
-          order={order}
+          order={activeOrder}
           open={cancelDialogOpen}
           onClose={() => setCancelDialogOpen(false)}
+        />
+
+        {/* Return Dialog */}
+        <ReturnRequestDialog
+          order={activeOrder}
+          open={returnDialogOpen}
+          onClose={() => setReturnDialogOpen(false)}
+          onOrderUpdated={setUpdatedOrder}
+          userName={user?.name || user?.email || "System"}
         />
       </SheetContent>
     </Sheet>

@@ -3,11 +3,12 @@
  */
 
 import { ProductForm } from "@/features/products";
+import { MainLayout } from "@/shared/components/layout/main-layout";
 
 export default function CreateProductPage() {
   return (
-    <div className="container mx-auto py-8">
+    <MainLayout>
       <ProductForm mode="create" />
-    </div>
+    </MainLayout>
   );
 }

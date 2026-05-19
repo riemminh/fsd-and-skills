@@ -3,9 +3,16 @@
  * All order-related API calls
  */
 
-import type { Order, OrderFilters, CreateOrderInput, UpdateOrderInput } from "../types";
+import type {
+  Order,
+  OrderFilters,
+  CreateOrderInput,
+  CreateReturnRequestInput,
+  UpdateOrderInput,
+} from "../types";
 import type { PaginationParams } from "@/core/api/types";
 import { mockOrders } from "@/data/mock-orders";
+import { productsApi } from "@/features/products/api";
 
 // Simulate API delay
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -229,6 +236,95 @@ export const ordersApi = {
         ? `${mockOrders[orderIndex].notes || ""}\nCancellation reason: ${reason}`
         : mockOrders[orderIndex].notes,
       updatedAt: new Date().toISOString(),
+    };
+
+    return mockOrders[orderIndex];
+  },
+
+  /**
+   * Create a return/refund request for an order
+   */
+  createReturnRequest: async (id: string, data: CreateReturnRequestInput): Promise<Order> => {
+    await delay(800);
+
+    const orderIndex = mockOrders.findIndex((order) => order.id === id);
+    if (orderIndex === -1) {
+      throw new Error("Order not found");
+    }
+
+    const order = mockOrders[orderIndex];
+    if (!["shipped", "delivered"].includes(order.status)) {
+      throw new Error("Only shipped or delivered orders can have return requests");
+    }
+
+    if (data.items.length === 0) {
+      throw new Error("Select at least one item to return");
+    }
+
+    const returnItems = data.items.map((returnItem) => {
+      const orderItem = order.items.find((item) => item.id === returnItem.orderItemId);
+      if (!orderItem) {
+        throw new Error("Returned item does not exist on this order");
+      }
+
+      if (returnItem.quantity < 1 || returnItem.quantity > orderItem.quantity) {
+        throw new Error(`Return quantity for ${orderItem.productName} is invalid`);
+      }
+
+      const refundAmount = returnItem.quantity * orderItem.price;
+
+      return {
+        orderItemId: orderItem.id,
+        productId: orderItem.productId,
+        productName: orderItem.productName,
+        quantity: returnItem.quantity,
+        unitPrice: orderItem.price,
+        refundAmount,
+        restocked: data.restockItems,
+      };
+    });
+
+    if (data.restockItems) {
+      await Promise.all(
+        returnItems.map(async (item) => {
+          const product = await productsApi.getProductById(item.productId);
+          if (!product) {
+            throw new Error(`Product ${item.productName} not found`);
+          }
+
+          await productsApi.updateProduct(item.productId, {
+            stock: product.stock + item.quantity,
+          });
+        })
+      );
+    }
+
+    const now = new Date().toISOString();
+    const returnRequest = {
+      id: `RET-${Date.now()}`,
+      status: "refunded" as const,
+      reason: data.reason,
+      items: returnItems,
+      refundAmount: data.refundAmount,
+      restockItems: data.restockItems,
+      createdAt: now,
+      createdBy: data.createdBy,
+    };
+
+    mockOrders[orderIndex] = {
+      ...order,
+      returns: [...(order.returns || []), returnRequest],
+      history: [
+        ...(order.history || []),
+        {
+          id: `history-return-${Date.now()}`,
+          status: order.status,
+          timestamp: now,
+          user: data.createdBy,
+          note: `Return/refund created for $${data.refundAmount.toFixed(2)}. ${data.restockItems ? "Items restocked." : "Items not restocked."} Reason: ${data.reason}`,
+        },
+      ],
+      updatedAt: now,
     };
 
     return mockOrders[orderIndex];

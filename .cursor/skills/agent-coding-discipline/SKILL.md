@@ -11,6 +11,6 @@ triggerKeywords: [discipline, scope, refactor, minimal, overcomplicate, surgical
 1. **Think** — state assumptions; ask if unclear; don't guess silently.
 2. **Simplicity** — smallest change; no speculative abstractions or unrequested features.
 3. **Surgical** — only lines required by the request; match repo style; clean your orphans only.
-4. **Verify** — define pass criteria; run `pnpm type-check && pnpm lint` after coding (workflows).
+4. **Verify** — define pass criteria; use the repo's normal checks after coding.
 
 Detail + Karpathy source: `references/karpathy.md`

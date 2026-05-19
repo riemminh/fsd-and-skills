@@ -14,7 +14,7 @@ triggerKeywords: [bug, fix, broken, error, crash, regression, debug, wrong, not 
 [ ] One root cause — orders/money/roles → read business-rules first
 [ ] Minimal fix (agent-coding-discipline)
 [ ] Avoid copying known debt/import patterns
-[ ] pnpm type-check && pnpm lint
+[ ] Verify with the repo's normal checks
 [ ] Report: cause · files · verify result
 ```
 

@@ -32,7 +32,7 @@ Source: [andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-s
 
 Multi-step: `1. [Step] → verify: [check]`
 
-**This repo:** workflows run `pnpm type-check && pnpm lint` after coding.
+**This repo:** workflows use the repo's normal checks after coding.
 
 ## Project-specific
 

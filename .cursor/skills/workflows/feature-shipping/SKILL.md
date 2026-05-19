@@ -13,8 +13,8 @@ triggerKeywords: [feature, ship, implement, add, create, new screen]
 [ ] If scope spans routes/features: `.repo-knowledge/AGENT_MAP.md` → matching feature/flow
 [ ] project-conventions + agent-coding-discipline
 [ ] Layers: types → *.api.ts → RQ hooks → components → thin page.tsx
-[ ] pnpm type-check && pnpm lint
-[ ] Report: shipped · files 
+[ ] Verify with the repo's normal checks
+[ ] Report: shipped · files
 ```
 
 Domain routing: `../../references/domain-routing.md`

@@ -7,3 +7,11 @@ src/hooks/
 src/lib/
 src/services/
 src/types/
+.cursor/skills/**/AGENTS.md
+.cursor/skills/**/CLAUDE.md
+.cursor/skills/**/README.md
+.cursor/skills/**/test-cases.json
+.cursor/references/**/AGENTS.md
+.cursor/references/**/CLAUDE.md
+.cursor/references/**/README.md
+.cursor/references/**/test-cases.json

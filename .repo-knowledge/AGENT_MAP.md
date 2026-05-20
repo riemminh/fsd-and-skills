@@ -12,6 +12,8 @@ Open only when the target file/flow is unclear.
 ## Flow Triggers
 
 - `create-order` (`create order`, `order total`, `order form`, `stock validation`, `order RBAC`) -> `.repo-knowledge/flows/create-order.md`
+- `create-product` (`create product`, `new product`, `product form`, `add product`, `product sku`) -> `.repo-knowledge/flows/create-product.md`
+- `dashboard` (`dashboard`, `operations dashboard`, `metrics`, `revenue`, `stock warnings`) -> `.repo-knowledge/flows/dashboard.md`
 
 ## Feature Lookup
 

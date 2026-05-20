@@ -41,27 +41,16 @@ Public API: `src/features/orders/index.ts`
 - `customers`
 - `products`
 
-## Architecture Debt Notes
-
-These replace the old `violations.json`. They exist so agents know which current imports are migration debt and should not be copied into new work.
+## Architecture Debt Counts
 
 - `cross-feature-import`: 10
-  - `src/features/orders/api/orders.api.ts` imports `@/features/products/api`
-  - `src/features/orders/components/customer-combobox.tsx` imports `@/features/customers`
-  - `src/features/orders/components/order-detail-drawer.tsx` imports `@/features/auth`
-  - `src/features/orders/components/order-items-field.tsx` imports `@/features/products`
-  - `src/features/orders/components/order-list.tsx` imports `@/features/auth`
-  - `src/features/orders/components/order-operations-dashboard.tsx` imports `@/features/products`
-  - `src/features/orders/components/product-combobox.tsx` imports `@/features/products`
-  - `src/features/orders/components/stock-availability-indicator.tsx` imports `@/features/products`
-  - ...2 more
 - `feature-self-deep-import`: 1
-  - `src/features/orders/utils/order-stock-integration.ts` imports `@/features/orders/types`
 - `legacy-import`: 1
-  - `src/features/orders/components/order-items-field.tsx` imports `@/types/form`
 
 ## Import Guidance
 
 - Outside this feature, import from `src/features/orders/index.ts`.
 - Inside this feature, prefer relative imports.
-- Do not add new legacy imports from `@/components`, `@/hooks`, `@/services`, `@/types`, or `@/lib`.
+- Do not add new legacy imports from `@/components`, `@/contexts`, `@/hooks`, `@/lib`, `@/services`, `@/types`.
+- Search only this feature/root files unless a flow file says otherwise.
+- Skip grep/read/edit for out-of-scope legacy roots unless named: `src/components`, `src/contexts`, `src/hooks`, `src/lib`, `src/services`, `src/types`.

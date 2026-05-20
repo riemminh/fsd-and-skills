@@ -10,6 +10,6 @@ triggerKeywords: [structure, folder, architecture, boundary, organize]
 
 `app/ → features/ → shared/ → core/ → config/` — higher imports lower only; **features never import features**.
 
-Use `.repo-knowledge/AGENT_MAP.md` only when route/feature ownership is unclear.
+Edit only matched route/feature scope. Declare exact edit files first; search only by passing those files to rg/grep. Skip grep/read/edit for roots outside the FSD map (`src/services`, `src/hooks`, `src/components`, `src/types`, `src/lib`, `src/contexts`) unless the prompt names them.
 
-Details: `../../references/structure.md` · `docs/ARCHITECTURE.md`
+Use `.repo-knowledge/AGENT_MAP.md` only when route/feature ownership is unclear.

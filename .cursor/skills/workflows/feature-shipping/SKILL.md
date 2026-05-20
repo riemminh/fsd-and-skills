@@ -1,19 +1,16 @@
 ---
 name: feature-shipping
-description: Ship a new screen/API capability; not for tiny edits or bugfixes.
+description: Use only when adding a new screen/API capability. Never use for fix/bug/lỗi/sai/regression prompts.
 disable-model-invocation: true
-priority: high
-triggerKeywords: [feature, screen, workflow, capability]
+priority: low
+triggerKeywords: [feature, screen, workflow, capability, add, build]
 ---
 
 # Feature Shipping
 
 ```
-[ ] Scope: 1–3 bullets; feature name; smallest slice
-[ ] If scope spans routes/features: `.repo-knowledge/AGENT_MAP.md`
-[ ] Layers: types → *.api.ts → RQ hooks → components → thin page.tsx
-[ ] Verify with the repo's normal checks
-[ ] Report: shipped · files
+[ ] If prompt says fix/bug/lỗi/sai/regression: stop and use `fix-bug-default`
+[ ] Scope: feature name + exact edit files before reading extra files
+[ ] Search only by passing exact scoped files to rg/grep; do not search `.`, project root, `with-skills`, or `src`
+[ ] Skip grep/read/edit for legacy roots unless this is a migration
 ```
-
-Optional refs: `../../../references/business-rules.md` · `../../../references/data-fetching.md`

@@ -31,9 +31,7 @@ Public API: `src/features/customers/index.ts`
 
 - none
 
-## Architecture Debt Notes
-
-These replace the old `violations.json`. They exist so agents know which current imports are migration debt and should not be copied into new work.
+## Architecture Debt Counts
 
 - none
 
@@ -41,4 +39,6 @@ These replace the old `violations.json`. They exist so agents know which current
 
 - Outside this feature, import from `src/features/customers/index.ts`.
 - Inside this feature, prefer relative imports.
-- Do not add new legacy imports from `@/components`, `@/hooks`, `@/services`, `@/types`, or `@/lib`.
+- Do not add new legacy imports from `@/components`, `@/contexts`, `@/hooks`, `@/lib`, `@/services`, `@/types`.
+- Search only this feature/root files unless a flow file says otherwise.
+- Skip grep/read/edit for out-of-scope legacy roots unless named: `src/components`, `src/contexts`, `src/hooks`, `src/lib`, `src/services`, `src/types`.

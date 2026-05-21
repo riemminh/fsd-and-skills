@@ -1,9 +1,6 @@
 ---
 name: security-frontend
-description: Token storage, XSS, NEXT_PUBLIC exposure, 401. Use when editing auth, ApiClient, env vars, or rendering untrusted HTML.
-disable-model-invocation: true
-priority: medium
-triggerKeywords: [auth, token, security, xss, env, NEXT_PUBLIC, 401, logout, login]
+description: Use for frontend security in this repo, including auth, token storage, XSS, env and NEXT_PUBLIC exposure, 401 handling, logout/login, ApiClient, and untrusted HTML.
 ---
 
 # Security (Frontend)

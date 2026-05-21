@@ -1,9 +1,6 @@
 ---
 name: agent-coding-discipline
-description: Minimal surgical diffs, simplicity, goal-driven verify. Use when writing/editing/reviewing code; pair with fix-bug-default or feature-shipping.
-disable-model-invocation: true
-priority: high
-triggerKeywords: [discipline, scope, refactor, minimal, overcomplicate, surgical, karpathy]
+description: Use when writing, editing, reviewing, refactoring, or scoping code in this repo to keep changes minimal, surgical, simple, and goal-verified.
 ---
 
 # Agent Coding Discipline
@@ -13,4 +10,4 @@ triggerKeywords: [discipline, scope, refactor, minimal, overcomplicate, surgical
 3. **Surgical** — only lines required by the request; match repo style; clean your orphans only.
 4. **Verify** — define pass criteria; use the repo's normal checks after coding.
 
-Detail + Karpathy source: `karpathy.md`
+Detail + Karpathy source: `references/discipline/karpathy.md`

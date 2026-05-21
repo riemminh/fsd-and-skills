@@ -1,9 +1,6 @@
 ---
 name: project-conventions
-description: Next.js/FSD paths and import boundaries. Use when structure/location is unclear.
-disable-model-invocation: true
-priority: medium
-triggerKeywords: [structure, folder, architecture, boundary, organize]
+description: Use for this repo when Next.js/FSD structure, folder location, architecture boundaries, route ownership, or import organization is unclear.
 ---
 
 # Project Conventions
@@ -15,3 +12,5 @@ Edit only matched route/feature scope. Declare exact edit files first; search on
 For React/Next `.tsx`, hooks, rendering, refactor, or component API changes, apply the workflow reference gate before patching.
 
 Use `.repo-knowledge/AGENT_MAP.md` only when route/feature ownership is unclear.
+
+For the directory map, read `references/project/structure.md`. For domain-to-skill routing, read `references/project/domain-routing.md`.

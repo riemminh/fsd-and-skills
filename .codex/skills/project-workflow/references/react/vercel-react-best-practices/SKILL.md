@@ -1,13 +1,10 @@
 ---
 name: vercel-react-best-practices
-description: React and Next.js performance optimization guidelines from Vercel Engineering. Use after repo flow scope is known when writing, reviewing, refactoring, or optimizing React/Next.js code.
+description: Use after repo flow scope is known when writing, reviewing, refactoring, or optimizing React and Next.js code, including performance, bundle size, rerenders, waterfalls, memoization, async work, and JavaScript lookups.
 license: MIT
 metadata:
   author: vercel
   version: "1.0.0"
-disable-model-invocation: true
-priority: low
-triggerKeywords: [performance, optimize, refactor, review, bundle, rerender, waterfall, memo]
 ---
 
 # Vercel React Best Practices

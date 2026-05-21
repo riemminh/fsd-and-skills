@@ -1,19 +1,10 @@
 ---
 name: vercel-composition-patterns
-description: React composition patterns that scale. Use after repo flow scope is known when refactoring component APIs, boolean props, compound components, render props, or provider boundaries.
+description: Use after repo flow scope is known when refactoring React component APIs, boolean props, compound components, render props, provider boundaries, context interfaces, slots, variants, or React 19 ref patterns.
 license: MIT
 metadata:
   author: vercel
   version: "1.0.0"
-disable-model-invocation: true
-priority: low
-triggerKeywords:
-  - component API
-  - boolean props
-  - compound component
-  - composition
-  - render props
-  - provider
 ---
 
 # Vercel Composition Patterns

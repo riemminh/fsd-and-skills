@@ -1,9 +1,6 @@
 ---
 name: data-fetching
-description: React Query hooks, QUERY_KEYS, invalidate after mutations. Use for cache/stale/refetch/mutation bugs — not business rules.
-disable-model-invocation: true
-priority: medium
-triggerKeywords: [query, cache, fetch, refetch, loading, mutation, api, axios, invalidate]
+description: Use for React Query, query keys, cache, stale/refetch behavior, loading states, mutations, API calls, axios, and invalidateQueries bugs in this repo. Not for business rules.
 ---
 
 # Data Fetching

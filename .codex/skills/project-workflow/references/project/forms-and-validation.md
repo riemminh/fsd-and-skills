@@ -1,9 +1,6 @@
 ---
 name: forms-and-validation
-description: RHF + Zod schemas and resolvers. Use only for multi-field forms with validation rules, not simple inputs.
-disable-model-invocation: true
-priority: low
-triggerKeywords: [form, validation, zod, react-hook-form, rhf, input, submit]
+description: Use for multi-field forms, validation, Zod schemas, React Hook Form, RHF resolvers, input validation, and submit validation in this repo. Not for simple inputs.
 ---
 
 # Forms & Validation

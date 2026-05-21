@@ -1,10 +1,6 @@
 ---
 name: business-rules
-description: Order status transitions, money fields, RBAC admin/manager/viewer. Use for cancel, timeline, roles, totals — not generic UI.
-disable-model-invocation: true
-priority: high
-triggerKeywords:
-  [order, status, payment, cancel, role, permission, admin, manager, viewer, money, total, tax]
+description: Use for order business rules in this repo, including status transitions, payment, cancellation, timeline, roles, permissions, admin/manager/viewer RBAC, money, totals, and tax. Not for generic UI.
 ---
 
 # Business Rules
@@ -22,6 +18,6 @@ triggerKeywords:
 
 ## On demand
 
-Matrix, demo accounts, auth keys, cancel rules: `orders-rbac.md`
+Matrix, demo accounts, auth keys, cancel rules: `references/project/orders-rbac.md`
 
 Sources: `src/features/orders/types/`, `order-status.ts`, `order-calculations.ts`

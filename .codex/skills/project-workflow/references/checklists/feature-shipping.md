@@ -1,9 +1,9 @@
 # Feature Shipping Checklist
 
-Use only when adding a new screen/API capability. Never use for fix/bug/loi/sai/regression prompts.
+Use only when adding a new screen/API capability. Never use for fix, bug, error, regression, incorrect behavior, or wrong behavior prompts.
 
 ```text
-[ ] If prompt says fix/bug/loi/sai/regression: stop and use `references/checklists/fix-bug-default.md`
+[ ] If prompt says fix, bug, error, regression, incorrect behavior, or wrong behavior: stop and use `references/checklists/fix-bug-default.md`
 [ ] Scope: feature name + exact edit files before reading extra files
 [ ] Search only by passing exact scoped files to rg/grep; do not search `.`, project root, `with-skills`, or `src`
 [ ] Reference gate before patch: choose `react`, `composition`, or `none`

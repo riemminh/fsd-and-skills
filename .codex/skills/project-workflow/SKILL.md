@@ -9,7 +9,7 @@ Use this as the single Codex entrypoint for this repo. Keep the workflow scoped:
 
 ## Route First
 
-- Bug, fix, loi, sai, broken, error, crash, regression, wrong behavior: read `references/checklists/fix-bug-default.md`.
+- Bug, fix, broken, error, crash, regression, incorrect behavior, wrong behavior: read `references/checklists/fix-bug-default.md`.
 - New feature, screen, workflow, API capability, add, build: read `references/checklists/feature-shipping.md`.
 - Scope, architecture, route ownership, folders, imports: read `references/project/project-conventions.md`; if ownership is unclear, read `.repo-knowledge/AGENT_MAP.md`.
 - UI, button, form UI, dialog, toast, loading, style, Tailwind, component design: read `references/project/ui-design-system.md`.
@@ -19,7 +19,6 @@ Use this as the single Codex entrypoint for this repo. Keep the workflow scoped:
 - Auth, token, security, XSS, env, NEXT_PUBLIC, 401, logout, login: read `references/project/security-frontend.md`.
 - React/Next performance, bundle, rerender, waterfall, memo, async optimization: read `references/react/vercel-react-best-practices/references/checks.md`, then at most two matching rule files.
 - Component API, boolean props, compound components, render props, provider/context, variants, slots: read `references/react/vercel-composition-patterns/references/checks.md`, then at most two matching rule files.
-- Manual browser bug repro only when the user explicitly asks `/browser-bug-repro` or `invoke browser-bug-repro`: read `references/browser/browser-bug-repro.md`.
 
 ## Baseline Discipline
 

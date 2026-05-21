@@ -1,0 +1,8 @@
+---
+description: Use Context7 for current external library documentation
+alwaysApply: true
+---
+
+When a task involves external packages, framework APIs, setup/configuration steps, or code examples for third-party libraries, use the `context7` MCP server to fetch current documentation before answering or editing code.
+
+Prefer explicit Context7 library IDs when they are known, such as `/vercel/next.js` or `/supabase/supabase`. Do not rely only on model training data for library-specific APIs.

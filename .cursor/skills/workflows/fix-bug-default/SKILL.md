@@ -3,7 +3,7 @@ name: fix-bug-default
 description: Bugfix workflow for broken/error/regression behavior; not for new features.
 disable-model-invocation: true
 priority: high
-triggerKeywords: [bug, fix, lỗi, sai, broken, error, crash, regression, wrong]
+triggerKeywords: [bug, fix, broken, error, crash, regression, incorrect, wrong]
 ---
 
 # Fix Bug (Default)
